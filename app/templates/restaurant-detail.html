@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Details — Explorely</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Explorely</span>
+          <span class="brand-tag">Curated India</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="explore.html" class="nav-link">Explore</a></li>
+        <li><a href="/destinations.html" class="nav-link">Destinations</a></li>
+        <li><a href="explore.html?category=Food" class="nav-link">Categories</a></li>
+        <li>
+          <a href="saved.html" class="nav-link">
+            Saved <span class="nav-saved-count">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="mode-indicator-pill" title="Click to view API status and toggle mode">
+          <span class="mode-dot"></span>
+          <span class="mode-text">Standalone Mode</span>
+        </div>
+
+        <div class="user-profile-menu">
+          <button class="user-avatar-btn" id="user-profile-btn">
+            <div class="avatar-circle">AS</div>
+            <span class="user-display-name">Ananya S.</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="modal-card" id="profile-dropdown" style="display:none;position:absolute;right:0;top:48px;width:200px;padding:0.75rem;box-shadow:var(--shadow-level-3);z-index:101;">
+            <a href="saved.html" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:13px;font-weight:600;">Saved Items</a>
+            <div style="border-top:1px solid var(--border);margin:0.4rem 0;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container" style="padding-bottom: 4rem;">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs-bar" id="rest-breadcrumbs">
+      <a href="index.html">Home</a> &gt; <a href="explore.html">Explore</a> &gt; <span id="rest-crumb-name">Restaurant Details</span>
+    </div>
+
+    <!-- Header Row -->
+    <div class="details-header-row">
+      <div>
+        <h1 class="details-title" id="rest-name">Loading Restaurant...</h1>
+        <div class="details-meta-line" id="rest-meta-line"></div>
+      </div>
+
+      <div style="display:flex;gap:0.75rem;">
+        <button class="btn btn-secondary" id="rest-save-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span id="rest-save-text">Save Restaurant</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hero Image Banner -->
+    <div style="height: 380px; border-radius: var(--radius-2xl); overflow: hidden; margin-bottom: 2.5rem; position: relative;">
+      <img id="rest-hero-img" src="" alt="Restaurant view" style="width:100%;height:100%;object-fit:cover;">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg, transparent 50%, rgba(11,28,48,0.7) 100%);display:flex;align-items:flex-end;padding:2rem;">
+        <div style="color:#fff;" id="rest-banner-locality"></div>
+      </div>
+    </div>
+
+    <div class="details-main-grid">
+      <!-- Left Column -->
+      <section>
+        <div class="specs-strip">
+          <div class="spec-item">
+            <span class="spec-label">Cuisine</span>
+            <span class="spec-value" id="rest-spec-cuisine">Goan Seafood</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Price Range</span>
+            <span class="spec-value" id="rest-spec-price">₹₹ (Moderate)</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Hours</span>
+            <span class="spec-value" id="rest-spec-hours">12:00 PM - 11:30 PM</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Rating</span>
+            <span class="spec-value" id="rest-spec-rating">★ 4.8 / 5.0</span>
+          </div>
+        </div>
+
+        <div class="details-section-block">
+          <h2 class="details-section-title">About the Culinary Space</h2>
+          <p id="rest-desc" style="font-size:15px;line-height:1.7;color:var(--on-surface-variant);"></p>
+        </div>
+
+        <div class="details-section-block">
+          <h2 class="details-section-title">Signature Must-Try Dishes</h2>
+          <div id="rest-must-try-list" style="display:flex;gap:0.75rem;flex-wrap:wrap;"></div>
+        </div>
+
+        <div class="details-section-block">
+          <h2 class="details-section-title">Address & Locality</h2>
+          <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.25rem;">
+            <p id="rest-address" style="font-size:14px;color:var(--on-surface);margin-bottom:0.5rem;"></p>
+            <div style="font-size:12px;color:var(--primary);font-weight:600;">Verified regional eatery</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Reserve / Save Card -->
+      
+<aside>
+  <div class="sticky-booking-card">
+    <div class="booking-price-header">
+      <div>
+        <span style="font-size:12px;color:var(--text-muted);">
+          Experience Price
+        </span>
+
+        <div style="font-size:26px;font-weight:800;color:var(--on-surface);">
+          ₹2,499 <span style="font-size:14px;font-weight:500;">per person</span>
+        </div>
+
+        <span style="font-size:12px;color:var(--text-muted);">
+          Price shown for one person; confirm inclusions before visiting.
+        </span>
+      </div>
+    </div>
+
+    <div class="booking-form-box">
+      <h3>Plan Your Visit</h3>
+      <p>
+        Discover the highlights, explore the location, and save this
+        experience for your next trip.
+      </p>
+
+      <h4>Before You Go</h4>
+      <p>
+        Check local conditions, opening hours, entry requirements,
+        and travel arrangements before visiting.
+      </p>
+
+      <p style="font-size:12px;color:var(--text-muted);">
+        Explorely helps you discover experiences. Bookings and payments
+        are not processed here.
+      </p>
+
+      <button
+        class="btn btn-secondary"
+        style="width:100%;margin-top:1rem;"
+        id="btn-save-rest-sidebar"
+        type="button"
+      >
+        ❤️ Save to Wishlist
+      </button>
+    </div>
+  </div>
+</aside>
+
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id') || '1', 10);
+      const rest = await window.ExplorelyAPI.getRestaurantById(id);
+
+      if (!rest) {
+        document.querySelector('main').innerHTML = '<div class="empty-state-box"><h3>Restaurant not found</h3><a href="index.html" class="btn btn-primary" style="margin-top:1rem;">Back Home</a></div>';
+        return;
+      }
+
+      document.title = `${rest.name} | Explorely`;
+      document.getElementById('rest-name').textContent = rest.name;
+      document.getElementById('rest-crumb-name').textContent = rest.name;
+      document.getElementById('rest-hero-img').src = rest.image_url;
+      document.getElementById('rest-banner-locality').innerHTML = `<h3>${rest.name}</h3><p>📍 ${rest.locality || rest.destination}</p>`;
+      document.getElementById('rest-desc').textContent = rest.description;
+      document.getElementById('rest-spec-cuisine').textContent = rest.cuisine;
+      document.getElementById('rest-spec-price').textContent = rest.price_range;
+      document.getElementById('rest-spec-hours').textContent = rest.opening_hours || '12:00 PM – 11:30 PM';
+      document.getElementById('rest-spec-rating').textContent = `★ ${rest.rating.toFixed(1)} (${rest.review_count} reviews)`;
+      document.getElementById('rest-address').textContent = rest.address;
+      document.getElementById('rest-card-price').textContent = rest.price_for_two ? window.formatINR(rest.price_for_two) : rest.price_range;
+
+      const metaLine = document.getElementById('rest-meta-line');
+      metaLine.innerHTML = `
+        <span class="pill-badge pill-badge-amber">🍽️ ${rest.cuisine}</span>
+        <span style="font-weight:600;"><span style="color:var(--secondary)">★</span> ${rest.rating.toFixed(1)} (${rest.review_count} reviews)</span>
+        <span>•</span>
+        <span style="color:var(--text-muted)">📍 ${rest.locality || rest.destination}</span>
+      `;
+
+      if (rest.must_try) {
+        document.getElementById('rest-must-try-list').innerHTML = rest.must_try.map(d => `
+          <span class="pill-badge pill-badge-glass" style="font-size:13px;padding:6px 14px;border:1px solid var(--border);">✨ ${d}</span>
+        `).join('');
+      }
+
+      // Save handlers
+      const saveBtn = document.getElementById('rest-save-btn');
+      const sideSaveBtn = document.getElementById('btn-save-rest-sidebar');
+      const isSaved = window.ExplorelyAPI.isRestaurantSaved(rest.restaurant_id);
+
+      const updateSaveUI = (saved) => {
+        saveBtn.classList.toggle('active', saved);
+        document.getElementById('rest-save-text').textContent = saved ? 'Saved to Wishlist' : 'Save Restaurant';
+        saveBtn.querySelector('svg').setAttribute('fill', saved ? '#E11D48' : 'none');
+      };
+      updateSaveUI(isSaved);
+
+      const toggleAction = async () => {
+        const newState = await window.ExplorelyAPI.toggleSaveRestaurant(rest.restaurant_id);
+        updateSaveUI(newState);
+        window.showToast(newState ? 'Saved restaurant to wishlist!' : 'Removed from wishlist.');
+      };
+
+      saveBtn.addEventListener('click', toggleAction);
+      if (sideSaveBtn) sideSaveBtn.addEventListener('click', toggleAction);
+    });
+  </script>
+</body>
+</html>
+

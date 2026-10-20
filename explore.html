@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Experiences — Explorely</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    .filter-sidebar .filter-dropdown { border-bottom: 1px solid var(--border); margin: 0; padding: 0; }
+    .filter-sidebar .filter-dropdown > summary { list-style: none; cursor: pointer; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1rem .15rem; font-weight:700; user-select:none; }
+    .filter-sidebar .filter-dropdown > summary::-webkit-details-marker { display:none; }
+    .filter-sidebar .filter-chevron { transition:transform 160ms ease; font-size:1.1rem; color:var(--text-muted); }
+    .filter-sidebar .filter-dropdown[open] .filter-chevron { transform:rotate(180deg); }
+    .filter-sidebar .filter-dropdown .filter-options-list { padding:0 .15rem 1rem; }
+    .filter-sidebar .filter-dropdown > div[style*="display:flex"] { padding:0 .15rem 1rem; }
+  </style>
+
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Explorely</span>
+          <span class="brand-tag">Curated India</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="explore.html" class="nav-link active">Explore</a></li>
+        <li><a href="/destinations.html" class="nav-link">Destinations</a></li>
+        <li><a href="/categories.html" class="nav-link">Categories</a></li>
+        <li>
+          <a href="saved.html" class="nav-link">
+            Saved <span class="nav-saved-count">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="mode-indicator-pill" title="Click to view API status and toggle mode">
+          <span class="mode-dot"></span>
+          <span class="mode-text">Standalone Mode</span>
+        </div>
+
+        <div class="user-profile-menu">
+          <button class="user-avatar-btn" id="user-profile-btn">
+            <div class="avatar-circle">AS</div>
+            <span class="user-display-name">Ananya S.</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="modal-card" id="profile-dropdown" style="display:none;position:absolute;right:0;top:48px;width:200px;padding:0.75rem;box-shadow:var(--shadow-level-3);z-index:101;">
+            <a href="saved.html" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:13px;font-weight:600;">Saved Items</a>
+            <div style="border-top:1px solid var(--border);margin:0.4rem 0;"></div>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub-Header Status Line & Quick Search Bar -->
+  <section style="background-color: var(--surface-bright); border-bottom: 1px solid var(--border); padding: 1.25rem 0;">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;font-size:13px;color:var(--text-muted);">
+        <div>
+          <a href="index.html">Home</a> &gt; <span>Explore</span> &gt; <strong id="breadcrumb-current-dest" style="color:var(--on-surface);">All India</strong>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;color:var(--primary);font-weight:600;">
+          <span>●</span>
+          <span id="header-banner-text">Showing sample experiences across India</span>
+        </div>
+      </div>
+
+      <!-- Compact Search Bar for Explore Page -->
+      <form class="unified-search-bar" id="explore-search-form" style="max-width: 100%; box-shadow: var(--shadow-level-1);">
+        <div class="search-segment" style="flex: 1.2;">
+          <span class="search-segment-label">Destination</span>
+          <input type="text" id="search-dest-input" class="search-segment-input" placeholder="e.g. Goa, Jaipur, Delhi">
+        </div>
+
+        <div class="search-divider"></div>
+
+        <div class="search-segment" style="flex: 1.2;">
+          <span class="search-segment-label">Keyword / Activity</span>
+          <input type="text" id="search-keyword-input" class="search-segment-input" placeholder="Scuba, Catamaran, Food, Bungee...">
+        </div>
+
+        <div class="search-divider"></div>
+
+        <div class="search-segment" id="dates-guests-segment" style="position:relative;min-width:180px;">
+          <span class="search-segment-label">Dates & Guests</span>
+          <button type="button" id="dates-guests-trigger" class="search-segment-input" aria-haspopup="dialog" aria-expanded="false" style="text-align:left;cursor:pointer;color:var(--text-muted);">Anytime • 2 Guests</button>
+          <div id="dates-guests-popover" role="dialog" aria-label="Choose dates and guests" hidden style="position:absolute;z-index:30;top:calc(100% + 18px);left:0;width:290px;padding:18px;background:var(--surface-card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-level-3);">
+            <label for="search-start-date" style="display:block;font-size:12px;font-weight:700;margin-bottom:5px;">Check-in</label>
+            <input type="date" id="search-start-date" class="search-segment-input" style="border:1px solid var(--border);border-radius:8px;padding:9px;margin-bottom:12px;">
+            <label for="search-end-date" style="display:block;font-size:12px;font-weight:700;margin-bottom:5px;">Check-out</label>
+            <input type="date" id="search-end-date" class="search-segment-input" style="border:1px solid var(--border);border-radius:8px;padding:9px;margin-bottom:14px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+              <div><strong style="display:block;font-size:13px;">Guests</strong><span style="font-size:11px;color:var(--text-muted);">Adults / travelers</span></div>
+              <div style="display:flex;align-items:center;gap:12px;"><button type="button" id="guests-minus" aria-label="Decrease guests" class="btn-ghost" style="border:1px solid var(--border);border-radius:50%;width:32px;height:32px;">−</button><strong id="search-guest-count">2</strong><button type="button" id="guests-plus" aria-label="Increase guests" class="btn-ghost" style="border:1px solid var(--border);border-radius:50%;width:32px;height:32px;">+</button></div>
+            </div>
+            <button type="button" id="dates-guests-apply" class="search-submit-btn" style="width:100%;justify-content:center;margin-top:16px;">Apply</button>
+          </div>
+        </div>
+
+        <button type="submit" class="search-submit-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span>Update Search</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Main Explore 2-Column Layout -->
+  <main class="container">
+    <div class="explore-layout">
+
+      <!-- Left Filter Sidebar -->
+      <aside class="filter-sidebar">
+        <div class="filter-header">
+          <div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:16px;">
+            <span>⚡</span> Filters
+          </div>
+          <button class="btn-ghost btn-sm" id="btn-clear-all-filters" style="padding:0;font-size:12px;">Clear All</button>
+        </div>
+
+        <!-- Filter 1: Destination -->
+        <details class="filter-group filter-dropdown" open>
+          <summary class="filter-group-title">Destination<span class="filter-chevron" aria-hidden="true">⌄</span></summary>
+          <div class="filter-options-list">
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="All India" checked> All India</span>
+              <span class="filter-count-badge">142</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Goa"> Goa</span>
+              <span class="filter-count-badge" style="background:#DCFCE7;color:#15803D;font-weight:700;">24</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Jaipur"> Jaipur</span>
+              <span class="filter-count-badge">18</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Bangalore"> Bangalore</span>
+              <span class="filter-count-badge">16</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Delhi"> Delhi</span>
+              <span class="filter-count-badge">20</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Chennai"> Chennai</span>
+              <span class="filter-count-badge">14</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Manali"> Manali</span>
+              <span class="filter-count-badge">12</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Mumbai"> Mumbai</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Udaipur"> Udaipur</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Jodhpur"> Jodhpur</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Varanasi"> Varanasi</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Rishikesh"> Rishikesh</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Munnar"> Munnar</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Alleppey"> Alleppey</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Hampi"> Hampi</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Mysuru"> Mysuru</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Kochi"> Kochi</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Agra"> Agra</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Amritsar"> Amritsar</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Darjeeling"> Darjeeling</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Shillong"> Shillong</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Puducherry"> Puducherry</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Andaman Islands"> Andaman Islands</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Lakshadweep"> Lakshadweep</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_destination" value="Hyderabad"> Hyderabad</span>
+              <span class="filter-count-badge">Sample</span>
+            </label>
+          
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Ahmedabad"> Ahmedabad</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Alappuzha"> Alappuzha</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Alibaug"> Alibaug</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Araku Valley"> Araku Valley</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Auli"> Auli</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Aurangabad"> Aurangabad</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Ayodhya"> Ayodhya</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Badami"> Badami</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Bengaluru"> Bengaluru</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Bhimtal"> Bhimtal</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Bhopal"> Bhopal</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Bhubaneswar"> Bhubaneswar</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Bikaner"> Bikaner</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Bodh Gaya"> Bodh Gaya</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Bundi"> Bundi</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Cherrapunji"> Cherrapunji</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Chidambaram"> Chidambaram</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Chikmagalur"> Chikmagalur</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Chittorgarh"> Chittorgarh</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Coorg"> Coorg</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Dandeli"> Dandeli</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Dhanushkodi"> Dhanushkodi</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Dharamshala"> Dharamshala</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Dibrugarh"> Dibrugarh</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Diu"> Diu</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Gangtok"> Gangtok</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Gokarna"> Gokarna</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Gwalior"> Gwalior</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Havelock Island"> Havelock Island</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Jaisalmer"> Jaisalmer</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Kannur"> Kannur</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Kanyakumari"> Kanyakumari</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Kasauli"> Kasauli</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Kaziranga"> Kaziranga</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Khajuraho"> Khajuraho</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Kodaikanal"> Kodaikanal</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Kolkata"> Kolkata</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Konark"> Konark</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Kumarakom"> Kumarakom</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Kumbakonam"> Kumbakonam</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Kumbhalgarh"> Kumbhalgarh</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Kutch"> Kutch</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Leh"> Leh</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Lonavala"> Lonavala</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Lucknow"> Lucknow</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Madurai"> Madurai</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Mahabalipuram"> Mahabalipuram</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Majuli"> Majuli</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Mount Abu"> Mount Abu</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Mussoorie"> Mussoorie</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Nainital"> Nainital</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Nashik"> Nashik</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Neil Island"> Neil Island</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Ooty"> Ooty</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Orchha"> Orchha</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Panchgani"> Panchgani</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Patna"> Patna</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Port Blair"> Port Blair</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Prayagraj"> Prayagraj</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Pune"> Pune</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Puri"> Puri</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Pushkar"> Pushkar</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Rameswaram"> Rameswaram</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Ranthambore"> Ranthambore</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Sanchi"> Sanchi</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Shimla"> Shimla</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Spiti Valley"> Spiti Valley</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Srinagar"> Srinagar</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Sundarbans"> Sundarbans</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Surat"> Surat</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Tadoba"> Tadoba</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Tawang"> Tawang</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Thanjavur"> Thanjavur</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Thekkady"> Thekkady</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Thrissur"> Thrissur</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Tirupati"> Tirupati</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Varkala"> Varkala</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Vijayapura"> Vijayapura</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Vijayawada"> Vijayawada</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Visakhapatnam"> Visakhapatnam</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Wayanad"> Wayanad</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Yelagiri"> Yelagiri</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Yercaud"> Yercaud</span><span class="filter-count-badge">Sample</span></label>
+            <label class="filter-radio-label"><span><input type="radio" name="filter_destination" value="Ziro"> Ziro</span><span class="filter-count-badge">Sample</span></label>
+          </div>
+        </details>
+
+        <!-- Filter 2: Experience Category -->
+        <details class="filter-group filter-dropdown">
+          <summary class="filter-group-title">Experience Category<span class="filter-chevron" aria-hidden="true">⌄</span></summary>
+          <div class="filter-options-list">
+            <label class="filter-checkbox-label">
+              <span><input type="checkbox" name="filter_category" value="Adventure"> Adventure & Water Sports</span>
+            </label>
+            <label class="filter-checkbox-label">
+              <span><input type="checkbox" name="filter_category" value="Beach & Leisure"> Beach & Coastal Trails</span>
+            </label>
+            <label class="filter-checkbox-label">
+              <span><input type="checkbox" name="filter_category" value="Historical"> Historical & Heritage Walks</span>
+            </label>
+            <label class="filter-checkbox-label">
+              <span><input type="checkbox" name="filter_category" value="Food"> Food & Dining Trails</span>
+            </label>
+            <label class="filter-checkbox-label">
+              <span><input type="checkbox" name="filter_category" value="Nature"> Nature & Wildlife Backwaters</span>
+            </label>
+            <label class="filter-checkbox-label">
+              <span><input type="checkbox" name="filter_category" value="Nightlife"> Nightlife & Sunset Cruises</span>
+            </label>
+          </div>
+        </details>
+
+        <!-- Filter 3: Budget -->
+        <details class="filter-group filter-dropdown">
+          <summary class="filter-group-title">Budget (per person)<span class="filter-chevron" aria-hidden="true">⌄</span></summary>
+          <div class="filter-options-list">
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_budget" value="1000"> Under ₹1,000</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_budget" value="3000"> ₹1,000 – ₹3,000</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_budget" value="5000"> ₹3,000 – ₹5,000</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_budget" value="10000"> Above ₹5,000</span>
+            </label>
+          </div>
+        </details>
+
+        <!-- Filter 4: Guest Rating -->
+        <details class="filter-group filter-dropdown">
+          <summary class="filter-group-title">Guest Rating<span class="filter-chevron" aria-hidden="true">⌄</span></summary>
+          <div class="filter-options-list">
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_rating" value="4.5"> ★ 4.5+ Stars</span>
+              <span class="filter-count-badge">Top Tier</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_rating" value="4.0"> ★ 4.0+ Stars</span>
+              <span class="filter-count-badge">Selected</span>
+            </label>
+            <label class="filter-radio-label">
+              <span><input type="radio" name="filter_rating" value="3.5"> ★ 3.5+ Stars</span>
+              <span class="filter-count-badge">Good</span>
+            </label>
+          </div>
+        </details>
+
+        <!-- Filter 5: Duration -->
+        <details class="filter-group filter-dropdown">
+          <summary class="filter-group-title">Experience Duration<span class="filter-chevron" aria-hidden="true">⌄</span></summary>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="this.classList.toggle('active')">Half Day</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="this.classList.toggle('active')">Full Day</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="this.classList.toggle('active')">Multi-day</button>
+          </div>
+        </details>
+
+        <button class="btn btn-primary" style="width:100%;margin-top:0.5rem;" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+          Apply Filters
+        </button>
+
+        <!-- Trust Badge Card -->
+        <div style="margin-top:1.5rem;padding:1rem;background-color:var(--surface-container-low);border-radius:var(--radius-lg);font-size:12px;color:var(--on-surface-variant);border:1px solid var(--border);">
+          <div style="display:flex;align-items:center;gap:6px;font-weight:700;color:var(--primary);margin-bottom:4px;">
+            <span>🛡️</span> 100% Verified Providers
+          </div>
+          <p style="line-height:1.4;">Every vendor in Goa is checked for safety standards, certified guides, and clear cancellation policies.</p>
+        </div>
+      </aside>
+
+      <!-- Right Results Content Area -->
+      <section>
+        <!-- Active Filter Pills & Sorting Toolbar -->
+        <div class="filter-active-pills-row" id="active-filter-pills"></div>
+
+        <div class="explore-toolbar">
+          <div class="results-count-text" id="results-count-number">
+            24 experiences found
+          </div>
+
+          <div class="sort-select-wrap">
+            <label for="sort-select">SORT BY</label>
+            <select id="sort-select" class="sort-select">
+              <option value="highest_rated">Highest Rated</option>
+              <option value="lowest_price">Lowest Price</option>
+              <option value="highest_price">Highest Price</option>
+              <option value="most_popular">Most Popular</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Experience Cards Grid -->
+        <div class="experiences-grid" id="experiences-results-grid">
+          <!-- Dynamically filled with renderCard -->
+        </div>
+
+        <!-- Pagination Controls -->
+        <div id="pagination-container"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/explore.js"></script>
+</body>
+</html>
+

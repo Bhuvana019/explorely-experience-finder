@@ -1,0 +1,15 @@
+# Add these constants near the imports in app/routers/experiences.py
+SOUTH_INDIA_DESTINATIONS = [
+    "Chennai", "Muttukadu", "Mahabalipuram", "Puducherry", "Auroville", "Madurai", "Thanjavur",
+    "Gangaikonda Cholapuram", "Rameswaram", "Kanyakumari", "Courtallam", "Ooty", "Coonoor", "Kodaikanal", "Hogenakkal",
+    "Mysuru", "Hampi", "Badami", "Pattadakal", "Aihole", "Belur", "Halebidu", "Somanathapura", "Bengaluru", "Madikeri",
+    "Gokarna", "Murudeshwar", "Udupi", "Mangaluru", "Sagara", "Kochi", "Alappuzha", "Mararikulam", "Kumarakom", "Munnar",
+    "Thekkady", "Varkala", "Kovalam", "Thiruvananthapuram", "Bekal", "Athirappilly", "Kozhikode", "North Goa", "South Goa",
+    "Candolim", "Old Goa", "Panaji", "Ponda", "Araku Valley", "Visakhapatnam", "Lepakshi", "Tirupati", "Chandragiri", "Srikalahasti",
+    "Vijayawada", "Hyderabad", "Yadadri", "Palampet", "Bhongir", "Vikarabad", "Ramanagara"
+]
+
+# Inside get_experiences(), immediately after `query = db.query(Experience)`, add:
+# query = query.filter(Experience.destination.in_(SOUTH_INDIA_DESTINATIONS))
+# Keep `limit: int = Query(100, ge=1, le=100)` so the Explore page receives up to 100 records.
+# This hides other-state experience records from the Explore API without deleting database data.

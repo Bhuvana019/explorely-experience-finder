@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinations of India — Curated Regional Portals | Explorely</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Explorely</span>
+          <span class="brand-tag">Curated India</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="explore.html" class="nav-link">Explore</a></li>
+        <li><a href="destinations.html" class="nav-link active">Destinations</a></li>
+        <li><a href="categories.html" class="nav-link">Categories</a></li>
+        <li>
+          <a href="saved.html" class="nav-link">
+            Saved <span class="nav-saved-count">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- API / Standalone Mode Pill -->
+        <div class="mode-indicator-pill" title="Click to view API status and toggle mode">
+          <span class="mode-dot"></span>
+          <span class="mode-text">Standalone Mode</span>
+        </div>
+
+        <!-- User Profile Menu -->
+        <div class="user-profile-menu">
+          <button class="user-avatar-btn" id="user-profile-btn">
+            <div class="avatar-circle">AS</div>
+            <span class="user-display-name">Ananya S.</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="modal-card" id="profile-dropdown" style="display:none;position:absolute;right:0;top:48px;width:200px;padding:0.75rem;box-shadow:var(--shadow-level-3);z-index:101;">
+            <a href="saved.html" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:13px;font-weight:600;">Saved Items</a>
+            <div style="border-top:1px solid var(--border);margin:0.4rem 0;"></div>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <div class="dest-hero-badge">
+        <span>📍</span> Indian Regional Discovery
+      </div>
+      <h1 class="display-hero">Explore India by Destination</h1>
+      <p class="hero-subtitle">
+        Deep-dive into 7 iconic Indian travel regions. Discover regional climate rhythms, authentic culinary heritage, must-see localities, and verified local experiences.
+      </p>
+
+      <!-- Region Filter Tabs -->
+      <div class="region-pill-tabs">
+        <button class="region-pill-btn active" data-region="all">
+          <span>🇮🇳</span> All Destinations (7)
+        </button>
+        <button class="region-pill-btn" data-region="coastal">
+          <span>🏖️</span> Coastal & Tropical
+        </button>
+        <button class="region-pill-btn" data-region="royal">
+          <span>🏰</span> Royal & Imperial Heritage
+        </button>
+        <button class="region-pill-btn" data-region="mountains">
+          <span>🏔️</span> Himalayan Escapes
+        </button>
+        <button class="region-pill-btn" data-region="modern">
+          <span>🌳</span> Urban Metros & Tech
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Destinations Portals Grid -->
+  <main class="container">
+    <div class="destinations-portal-grid" id="destinations-portal-container">
+
+      <!-- Destination 1: GOA -->
+      <article class="destination-portal-card" id="dest-card-goa" data-region="coastal">
+        <div class="dest-portal-image-wrap">
+          <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80" alt="Goa">
+          <div class="dest-portal-overlay-gradient">
+            <div class="dest-portal-overlay-top">
+              <span class="pill-badge pill-badge-teal">🏖️ COASTAL & HERITAGE</span>
+              <span class="pill-badge pill-badge-glass">8 Verified Experiences</span>
+            </div>
+            <div class="dest-portal-overlay-bottom">
+              <h2 class="dest-portal-title">Goa</h2>
+              <span class="dest-portal-tagline">Sun, Sand & 450-Year Portuguese Charm</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-portal-body">
+          <p class="dest-portal-desc">
+            A tropical haven where palm-fringed Arabian shores meet pastel Latin quarters. Dive into coral reefs off Grand Island, glide through silent mangrove backwaters, or hike to the 310m Dudhsagar waterfalls.
+          </p>
+
+          <div class="dest-specs-strip">
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Best Time</span>
+              <span class="dest-spec-val">Oct – May</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Avg Budget</span>
+              <span class="dest-spec-val">₹2,000 / day</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Ideal Stay</span>
+              <span class="dest-spec-val">4 – 6 Days</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Rating</span>
+              <span class="dest-spec-val" style="color:var(--secondary);">4.8 ★</span>
+            </div>
+          </div>
+
+          <div class="dest-localities-block">
+            <span class="dest-block-title">Top Localities & Neighborhoods</span>
+            <div class="dest-localities-list">
+              <span class="dest-locality-pill">Grand Island (Scuba)</span>
+              <span class="dest-locality-pill">Fontainhas Latin Quarter</span>
+              <span class="dest-locality-pill">Sal River Backwaters</span>
+              <span class="dest-locality-pill">Mollem Forest Safari</span>
+            </div>
+          </div>
+
+          <div class="dest-dish-callout">
+            <span>🍛</span>
+            <span><strong>Signature Taste:</strong> Goan Fish Curry Thali, Recheado Crab & Bebinca</span>
+          </div>
+
+          <div class="dest-portal-actions">
+            <a href="/destinations.html" class="btn btn-primary btn-sm" style="flex:1.2;">
+              Explore Goa Experiences (8) &rarr;
+            </a>
+            <button class="btn btn-secondary btn-sm btn-open-dest-guide" data-dest="goa" style="flex:1;">
+              Insider Guide & Plan
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Destination 2: JAIPUR -->
+      <article class="destination-portal-card" id="dest-card-jaipur" data-region="royal">
+        <div class="dest-portal-image-wrap">
+          <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1200&q=80" alt="Jaipur">
+          <div class="dest-portal-overlay-gradient">
+            <div class="dest-portal-overlay-top">
+              <span class="pill-badge pill-badge-amber">🏰 ROYAL RAJASTHAN</span>
+              <span class="pill-badge pill-badge-glass">4 Verified Experiences</span>
+            </div>
+            <div class="dest-portal-overlay-bottom">
+              <h2 class="dest-portal-title">Jaipur</h2>
+              <span class="dest-portal-tagline">The Pink City & Regalia of Rajasthan</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-portal-body">
+          <p class="dest-portal-desc">
+            The majestic heart of Rajput royalty. Soar on sunrise hot air balloons above Aravalli fortress ramparts, explore Hawa Mahal's 953 honeycombed windows, and decode celestial sundials at Jantar Mantar.
+          </p>
+
+          <div class="dest-specs-strip">
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Best Time</span>
+              <span class="dest-spec-val">Oct – Mar</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Avg Budget</span>
+              <span class="dest-spec-val">₹2,500 / day</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Ideal Stay</span>
+              <span class="dest-spec-val">3 – 4 Days</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Rating</span>
+              <span class="dest-spec-val" style="color:var(--secondary);">4.9 ★</span>
+            </div>
+          </div>
+
+          <div class="dest-localities-block">
+            <span class="dest-block-title">Top Localities & Neighborhoods</span>
+            <div class="dest-localities-list">
+              <span class="dest-locality-pill">Amber Fort Ramparts</span>
+              <span class="dest-locality-pill">Old Walled City</span>
+              <span class="dest-locality-pill">Badi Choupad</span>
+              <span class="dest-locality-pill">Johari Bazaar Gemstones</span>
+            </div>
+          </div>
+
+          <div class="dest-dish-callout">
+            <span>👑</span>
+            <span><strong>Signature Taste:</strong> Royal Laal Maas, Dal Baati Churma & Pyaaz Kachori</span>
+          </div>
+
+          <div class="dest-portal-actions">
+            <a href="explore.html?destination=Jaipur" class="btn btn-primary btn-sm" style="flex:1.2;">
+              Explore Jaipur Experiences (4) &rarr;
+            </a>
+            <button class="btn btn-secondary btn-sm btn-open-dest-guide" data-dest="jaipur" style="flex:1;">
+              Insider Guide & Plan
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Destination 3: MANALI -->
+      <article class="destination-portal-card" id="dest-card-manali" data-region="mountains">
+        <div class="dest-portal-image-wrap">
+          <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80" alt="Manali">
+          <div class="dest-portal-overlay-gradient">
+            <div class="dest-portal-overlay-top">
+              <span class="pill-badge pill-badge-teal">🏔️ HIMALAYAN ESCAPE</span>
+              <span class="pill-badge pill-badge-glass">3 Verified Experiences</span>
+            </div>
+            <div class="dest-portal-overlay-bottom">
+              <h2 class="dest-portal-title">Manali</h2>
+              <span class="dest-portal-tagline">Himalayan Vistas, Alpine Valleys & Snow Thrills</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-portal-body">
+          <p class="dest-portal-desc">
+            Nestled beneath the snow-capped Pir Panjal peaks. Experience high-altitude tandem paragliding at 8,000 ft in Solang Valley, meadow zorbing, cedar forest temple walks, and alpine trout dining.
+          </p>
+
+          <div class="dest-specs-strip">
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Best Time</span>
+              <span class="dest-spec-val">All Year</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Avg Budget</span>
+              <span class="dest-spec-val">₹2,200 / day</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Ideal Stay</span>
+              <span class="dest-spec-val">4 – 5 Days</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Rating</span>
+              <span class="dest-spec-val" style="color:var(--secondary);">4.9 ★</span>
+            </div>
+          </div>
+
+          <div class="dest-localities-block">
+            <span class="dest-block-title">Top Localities & Neighborhoods</span>
+            <div class="dest-localities-list">
+              <span class="dest-locality-pill">Solang Valley (Air Sports)</span>
+              <span class="dest-locality-pill">Old Manali Cafes</span>
+              <span class="dest-locality-pill">Vashisht Hot Springs</span>
+              <span class="dest-locality-pill">Rohtang Pass & Atal Tunnel</span>
+            </div>
+          </div>
+
+          <div class="dest-dish-callout">
+            <span>🐟</span>
+            <span><strong>Signature Taste:</strong> Pan-fried Himalayan Trout, Warm Siddu & Apple Tart</span>
+          </div>
+
+          <div class="dest-portal-actions">
+            <a href="explore.html?destination=Manali" class="btn btn-primary btn-sm" style="flex:1.2;">
+              Explore Manali Experiences (3) &rarr;
+            </a>
+            <button class="btn btn-secondary btn-sm btn-open-dest-guide" data-dest="manali" style="flex:1;">
+              Insider Guide & Plan
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Destination 4: DELHI -->
+      <article class="destination-portal-card" id="dest-card-delhi" data-region="royal">
+        <div class="dest-portal-image-wrap">
+          <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80" alt="Delhi">
+          <div class="dest-portal-overlay-gradient">
+            <div class="dest-portal-overlay-top">
+              <span class="pill-badge pill-badge-amber">🏛️ IMPERIAL & CULINARY</span>
+              <span class="pill-badge pill-badge-glass">4 Verified Experiences</span>
+            </div>
+            <div class="dest-portal-overlay-bottom">
+              <h2 class="dest-portal-title">Delhi</h2>
+              <span class="dest-portal-tagline">Capital of Seven Empires & Heritage Street Food</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-portal-body">
+          <p class="dest-portal-desc">
+            An intoxicating labyrinth where Mughal monuments meet the culinary soul of North India. Taste 100-year-old seekh kebabs in Chandni Chowk, ride through Asia's largest spice market, and explore grand imperial tombs.
+          </p>
+
+          <div class="dest-specs-strip">
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Best Time</span>
+              <span class="dest-spec-val">Oct – Mar</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Avg Budget</span>
+              <span class="dest-spec-val">₹1,800 / day</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Ideal Stay</span>
+              <span class="dest-spec-val">3 – 4 Days</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Rating</span>
+              <span class="dest-spec-val" style="color:var(--secondary);">4.8 ★</span>
+            </div>
+          </div>
+
+          <div class="dest-localities-block">
+            <span class="dest-block-title">Top Localities & Neighborhoods</span>
+            <div class="dest-localities-list">
+              <span class="dest-locality-pill">Chandni Chowk Alleys</span>
+              <span class="dest-locality-pill">Jama Masjid Precinct</span>
+              <span class="dest-locality-pill">Khari Baoli Spice Bazaar</span>
+              <span class="dest-locality-pill">Connaught Place & Mehrauli</span>
+            </div>
+          </div>
+
+          <div class="dest-dish-callout">
+            <span>🍢</span>
+            <span><strong>Signature Taste:</strong> Karim's Mutton Burra (1913), Paranthe & Rabri Jalebi</span>
+          </div>
+
+          <div class="dest-portal-actions">
+            <a href="explore.html?destination=Delhi" class="btn btn-primary btn-sm" style="flex:1.2;">
+              Explore Delhi Experiences (4) &rarr;
+            </a>
+            <button class="btn btn-secondary btn-sm btn-open-dest-guide" data-dest="delhi" style="flex:1;">
+              Insider Guide & Plan
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Destination 5: CHENNAI -->
+      <article class="destination-portal-card" id="dest-card-chennai" data-region="coastal">
+        <div class="dest-portal-image-wrap">
+          <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80" alt="Chennai">
+          <div class="dest-portal-overlay-gradient">
+            <div class="dest-portal-overlay-top">
+              <span class="pill-badge pill-badge-teal">🌊 DRAVIDIAN COAST</span>
+              <span class="pill-badge pill-badge-glass">3 Verified Experiences</span>
+            </div>
+            <div class="dest-portal-overlay-bottom">
+              <h2 class="dest-portal-title">Chennai</h2>
+              <span class="dest-portal-tagline">Dravidian Temples, Bay of Bengal Coast & Filter Kaapi</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-portal-body">
+          <p class="dest-portal-desc">
+            The cultural heartbeat of Southern India. Marvel at 7th-century UNESCO seaside stone sculptures at Mahabalipuram, experience sunrise Carnatic chanting in Mylapore, and savor foaming brass-filter coffee.
+          </p>
+
+          <div class="dest-specs-strip">
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Best Time</span>
+              <span class="dest-spec-val">Nov – Feb</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Avg Budget</span>
+              <span class="dest-spec-val">₹1,500 / day</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Ideal Stay</span>
+              <span class="dest-spec-val">2 – 3 Days</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Rating</span>
+              <span class="dest-spec-val" style="color:var(--secondary);">4.8 ★</span>
+            </div>
+          </div>
+
+          <div class="dest-localities-block">
+            <span class="dest-block-title">Top Localities & Neighborhoods</span>
+            <div class="dest-localities-list">
+              <span class="dest-locality-pill">Mylapore Agraharams</span>
+              <span class="dest-locality-pill">Mahabalipuram Shore Temples</span>
+              <span class="dest-locality-pill">Marina Coastal Promenade</span>
+              <span class="dest-locality-pill">Besant Nagar Beach</span>
+            </div>
+          </div>
+
+          <div class="dest-dish-callout">
+            <span>☕</span>
+            <span><strong>Signature Taste:</strong> Brass-filter Kaapi, Ghee Podi Idli & Chettinad Seafood</span>
+          </div>
+
+          <div class="dest-portal-actions">
+            <a href="explore.html?destination=Chennai" class="btn btn-primary btn-sm" style="flex:1.2;">
+              Explore Chennai Experiences (3) &rarr;
+            </a>
+            <button class="btn btn-secondary btn-sm btn-open-dest-guide" data-dest="chennai" style="flex:1;">
+              Insider Guide & Plan
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Destination 6: BANGALORE -->
+      <article class="destination-portal-card" id="dest-card-bangalore" data-region="modern">
+        <div class="dest-portal-image-wrap">
+          <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1200&q=80" alt="Bangalore">
+          <div class="dest-portal-overlay-gradient">
+            <div class="dest-portal-overlay-top">
+              <span class="pill-badge pill-badge-amber">🍺 URBAN & BREWERIES</span>
+              <span class="pill-badge pill-badge-glass">3 Verified Experiences</span>
+            </div>
+            <div class="dest-portal-overlay-bottom">
+              <h2 class="dest-portal-title">Bangalore</h2>
+              <span class="dest-portal-tagline">Silicon Garden City, Craft Breweries & Iconic Tiffins</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-portal-body">
+          <p class="dest-portal-desc">
+            India's vibrant pub capital and tech capital in one. Hop through award-winning craft microbreweries in Indiranagar, taste legendary crispy ghee roast dosas at 1943 heritage tiffins, and walk lush botanical conservatories.
+          </p>
+
+          <div class="dest-specs-strip">
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Best Time</span>
+              <span class="dest-spec-val">All Year</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Avg Budget</span>
+              <span class="dest-spec-val">₹1,800 / day</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Ideal Stay</span>
+              <span class="dest-spec-val">2 – 3 Days</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Rating</span>
+              <span class="dest-spec-val" style="color:var(--secondary);">4.8 ★</span>
+            </div>
+          </div>
+
+          <div class="dest-localities-block">
+            <span class="dest-block-title">Top Localities & Neighborhoods</span>
+            <div class="dest-localities-list">
+              <span class="dest-locality-pill">Indiranagar 100ft Taprooms</span>
+              <span class="dest-locality-pill">Gandhi Bazaar Heritage Tiffins</span>
+              <span class="dest-locality-pill">Cubbon Park & Church St</span>
+              <span class="dest-locality-pill">Lalbagh Botanical Gardens</span>
+            </div>
+          </div>
+
+          <div class="dest-dish-callout">
+            <span>🥞</span>
+            <span><strong>Signature Taste:</strong> Vidyarthi Bhavan Ghee Roast Dosa, House IPAs & Mysore Pak</span>
+          </div>
+
+          <div class="dest-portal-actions">
+            <a href="explore.html?destination=Bangalore" class="btn btn-primary btn-sm" style="flex:1.2;">
+              Explore Bangalore Experiences (3) &rarr;
+            </a>
+            <button class="btn btn-secondary btn-sm btn-open-dest-guide" data-dest="bangalore" style="flex:1;">
+              Insider Guide & Plan
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Destination 7: MUMBAI -->
+      <article class="destination-portal-card" id="dest-card-mumbai" data-region="coastal">
+        <div class="dest-portal-image-wrap">
+          <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80" alt="Mumbai">
+          <div class="dest-portal-overlay-gradient">
+            <div class="dest-portal-overlay-top">
+              <span class="pill-badge pill-badge-teal">🌆 COASTAL METROPOLIS</span>
+              <span class="pill-badge pill-badge-glass">3 Verified Experiences</span>
+            </div>
+            <div class="dest-portal-overlay-bottom">
+              <h2 class="dest-portal-title">Mumbai</h2>
+              <span class="dest-portal-tagline">City of Dreams, Marine Drive & Art Deco Marvels</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-portal-body">
+          <p class="dest-portal-desc">
+            A dynamic coastal powerhouse overlooking the Arabian Sea. Cycle the breezy Queen's Necklace promenade at dawn, marvel at Asia's largest cluster of Art Deco buildings, and savor Irani bun maska at heritage bakeries.
+          </p>
+
+          <div class="dest-specs-strip">
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Best Time</span>
+              <span class="dest-spec-val">Nov – Feb</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Avg Budget</span>
+              <span class="dest-spec-val">₹2,500 / day</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Ideal Stay</span>
+              <span class="dest-spec-val">3 – 4 Days</span>
+            </div>
+            <div class="dest-spec-item">
+              <span class="dest-spec-label">Rating</span>
+              <span class="dest-spec-val" style="color:var(--secondary);">4.8 ★</span>
+            </div>
+          </div>
+
+          <div class="dest-localities-block">
+            <span class="dest-block-title">Top Localities & Neighborhoods</span>
+            <div class="dest-localities-list">
+              <span class="dest-locality-pill">Marine Drive Queen's Necklace</span>
+              <span class="dest-locality-pill">Gateway of India & Colaba</span>
+              <span class="dest-locality-pill">Fort Art Deco District</span>
+              <span class="dest-locality-pill">Kala Ghoda Heritage Cafes</span>
+            </div>
+          </div>
+
+          <div class="dest-dish-callout">
+            <span>🥖</span>
+            <span><strong>Signature Taste:</strong> Yazdani Bakery Bun Maska & Chai, Bombay Duck & Vada Pav</span>
+          </div>
+
+          <div class="dest-portal-actions">
+            <a href="explore.html?destination=Mumbai" class="btn btn-primary btn-sm" style="flex:1.2;">
+              Explore Mumbai Experiences (3) &rarr;
+            </a>
+            <button class="btn btn-secondary btn-sm btn-open-dest-guide" data-dest="mumbai" style="flex:1;">
+              Insider Guide & Plan
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Side-by-Side Destination Comparison Tool -->
+    <section class="dest-comparator-box">
+      <div style="text-align:center;max-width:680px;margin:0 auto;">
+        <span class="pill-badge pill-badge-teal" style="margin-bottom:0.5rem;">TRIP PLANNING TOOL</span>
+        <h2 style="font-size:28px;font-weight:800;letter-spacing:-0.02em;">Compare Destinations Side-by-Side</h2>
+        <p style="color:var(--text-muted);font-size:14.5px;margin-top:0.35rem;">
+          Torn between destinations? Compare regional climate, estimated budget, culinary scenes, and travel pace to choose your next journey.
+        </p>
+      </div>
+
+      <div class="comparator-selectors-row">
+        <div class="comparator-select-item">
+          <label for="compare-dest-a">First Destination</label>
+          <select id="compare-dest-a" class="comparator-select-input">
+            <option value="goa" selected>Goa (Coastal Haven)</option>
+            <option value="jaipur">Jaipur (Pink City)</option>
+            <option value="manali">Manali (Himalayan Valley)</option>
+            <option value="delhi">Delhi (Imperial Heritage)</option>
+            <option value="chennai">Chennai (Dravidian Coast)</option>
+            <option value="bangalore">Bangalore (Garden & Pubs)</option>
+            <option value="mumbai">Mumbai (Art Deco Coast)</option>
+          </select>
+        </div>
+
+        <div style="font-weight:800;color:var(--text-muted);font-size:18px;">VS</div>
+
+        <div class="comparator-select-item">
+          <label for="compare-dest-b">Second Destination</label>
+          <select id="compare-dest-b" class="comparator-select-input">
+            <option value="goa">Goa (Coastal Haven)</option>
+            <option value="jaipur" selected>Jaipur (Pink City)</option>
+            <option value="manali">Manali (Himalayan Valley)</option>
+            <option value="delhi">Delhi (Imperial Heritage)</option>
+            <option value="chennai">Chennai (Dravidian Coast)</option>
+            <option value="bangalore">Bangalore (Garden & Pubs)</option>
+            <option value="mumbai">Mumbai (Art Deco Coast)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="comparator-table-wrap">
+        <table class="comparator-table">
+          <thead>
+            <tr>
+              <th style="width:26%;">Comparison Factor</th>
+              <th id="cmp-head-a" style="width:37%;color:var(--primary);">Goa</th>
+              <th id="cmp-head-b" style="width:37%;color:var(--secondary);">Jaipur</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Trip Vibe & Rhythm</strong></td>
+              <td id="cmp-vibe-a">Tropical, Laid-back & Adrenaline</td>
+              <td id="cmp-vibe-b">Majestic, Historic & Vibrant Bazaars</td>
+            </tr>
+            <tr>
+              <td><strong>Best Season to Visit</strong></td>
+              <td id="cmp-season-a">October – May</td>
+              <td id="cmp-season-b">October – March</td>
+            </tr>
+            <tr>
+              <td><strong>Estimated Daily Budget</strong></td>
+              <td id="cmp-budget-a">₹2,000 / day</td>
+              <td id="cmp-budget-b">₹2,500 / day</td>
+            </tr>
+            <tr>
+              <td><strong>Recommended Stay Length</strong></td>
+              <td id="cmp-stay-a">4 – 6 Days</td>
+              <td id="cmp-stay-b">3 – 4 Days</td>
+            </tr>
+            <tr>
+              <td><strong>Signature Culinary Dishes</strong></td>
+              <td id="cmp-dish-a">Goan Fish Curry Thali, Recheado Crab & Bebinca</td>
+              <td id="cmp-dish-b">Royal Laal Maas, Dal Baati Churma & Pyaaz Kachori</td>
+            </tr>
+            <tr>
+              <td><strong>Direct Catalog Access</strong></td>
+              <td><a id="cmp-link-a" href="/destinations.html" class="btn btn-secondary btn-sm">Explore Goa Experiences &rarr;</a></td>
+              <td><a id="cmp-link-b" href="explore.html?destination=Jaipur" class="btn btn-secondary btn-sm">Explore Jaipur Experiences &rarr;</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Cross-links Discovery Strip -->
+    <div class="explore-modes-switcher-bar">
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <span style="font-size:20px;">🎨</span>
+        <span>Looking to explore by activity type rather than location?</span>
+      </div>
+      <div style="display:flex;gap:0.75rem;">
+        <a href="categories.html" class="btn btn-secondary btn-sm">Browse Travel Categories &rarr;</a>
+        <a href="explore.html" class="btn btn-primary btn-sm">Universal Experience Search &rarr;</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Destination Insider Guide Modal -->
+  <div class="dest-guide-modal" id="dest-guide-modal">
+    <div class="dest-guide-card">
+      <button class="dest-guide-close-btn" id="close-dest-guide">&times;</button>
+      <div class="dest-guide-header">
+        <img id="modal-dest-img" src="" alt="Destination">
+        <div class="dest-guide-header-overlay">
+          <h3 id="modal-dest-title" style="font-size:28px;font-weight:800;letter-spacing:-0.02em;"></h3>
+          <span id="modal-dest-tagline" style="font-size:14px;color:rgba(255,255,255,0.9);"></span>
+        </div>
+      </div>
+      <div class="dest-guide-content">
+        <div>
+          <h4 style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:0.05em;margin-bottom:0.35rem;">Destination Overview</h4>
+          <p id="modal-dest-desc" style="font-size:14.5px;color:var(--on-surface-variant);line-height:1.6;"></p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;background:var(--surface-container-low);padding:1rem;border-radius:var(--radius-lg);">
+          <div>
+            <span style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Best Climate Window</span>
+            <div id="modal-dest-season" style="font-size:13.5px;font-weight:700;color:var(--on-surface);margin-top:2px;"></div>
+          </div>
+          <div>
+            <span style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Transit Connectivity</span>
+            <div id="modal-dest-connectivity" style="font-size:13px;font-weight:600;color:var(--on-surface);margin-top:2px;"></div>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-size:14px;font-weight:800;color:var(--on-surface);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;">
+            <span>🗓️</span> Recommended 3-Day Travel Itinerary
+          </h4>
+          <div id="modal-dest-itinerary" style="display:flex;flex-direction:column;gap:1rem;"></div>
+        </div>
+
+        <div style="background:#ECFDF5;border:1px solid #A7F3D0;border-radius:var(--radius-lg);padding:1rem;">
+          <strong style="color:#065F46;font-size:13px;display:block;margin-bottom:2px;">💡 Insider Tip from Local Guides:</strong>
+          <span id="modal-dest-tip" style="color:#064E3B;font-size:13px;line-height:1.5;"></span>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:0.5rem;">
+          <a id="modal-dest-explore-btn" href="#" class="btn btn-primary">
+            Explore Experiences &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/destinations.js"></script>
+</body>
+</html>
+

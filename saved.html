@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved Experiences & Places — Explorely</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Explorely</span>
+          <span class="brand-tag">Curated India</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="explore.html" class="nav-link">Explore</a></li>
+        <li><a href="/destinations.html" class="nav-link">Destinations</a></li>
+        <li><a href="/categories.html" class="nav-link">Categories</a></li>
+        <li>
+          <a href="saved.html" class="nav-link active">
+            Saved <span class="nav-saved-count">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="mode-indicator-pill" title="Click to view API status and toggle mode">
+          <span class="mode-dot"></span>
+          <span class="mode-text">Standalone Mode</span>
+        </div>
+
+        <div class="user-profile-menu">
+          <button class="user-avatar-btn" id="user-profile-btn">
+            <div class="avatar-circle">AS</div>
+            <span class="user-display-name">Ananya S.</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="modal-card" id="profile-dropdown" style="display:none;position:absolute;right:0;top:48px;width:200px;padding:0.75rem;box-shadow:var(--shadow-level-3);z-index:101;">
+            <a href="saved.html" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:13px;font-weight:600;">Saved Items</a>
+            <div style="border-top:1px solid var(--border);margin:0.4rem 0;"></div>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Saved Page Content -->
+  <main class="container">
+
+    <!-- Page Header (Screenshot 13) -->
+    <div class="saved-header-wrap">
+      <div>
+        <span class="pill-badge pill-badge-teal" style="margin-bottom:0.6rem;">Personal Travel Vault &bull; Live Sync</span>
+        <h1 class="display-hero" style="font-size: 38px; line-height: 46px;">Saved Experiences & Places</h1>
+        <p class="body-md" style="margin-top:0.4rem;">
+          Manage your bookmarked activities, attractions, and dining spots across India's most evocative destinations.
+        </p>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+        <button class="btn btn-secondary btn-sm" id="btn-clear-all-saved">
+          🗑️ Clear All
+        </button>
+        <button class="btn btn-secondary btn-sm" id="btn-export-list">
+          📥 Export List (JSON)
+        </button>
+        <button class="btn btn-primary btn-sm" id="btn-sync-project1">
+          🔄 Sync to Smart Travel Planner
+        </button>
+      </div>
+    </div>
+
+    <!-- 4 Metrics Widgets (Screenshot 13) -->
+    <div class="saved-metrics-grid">
+      <!-- Metric 1: Total Curated Saves -->
+      <div class="saved-metric-card">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+          <span style="font-size:18px;">📑</span>
+          <span class="saved-metric-label" style="margin:0;">Total Curated Saves</span>
+        </div>
+        <div class="saved-metric-value" id="metric-total-saves">4</div>
+      </div>
+
+      <!-- Metric 2: Estimated Total Value -->
+      <div class="saved-metric-card">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+          <span style="font-size:18px;">🪙</span>
+          <span class="saved-metric-label" style="margin:0;">Estimated Total Value</span>
+        </div>
+        <div class="saved-metric-value" id="metric-total-value">₹12,199</div>
+      </div>
+
+      <!-- Metric 3: Cities -->
+      <div class="saved-metric-card">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+          <span style="font-size:18px;">📍</span>
+          <span class="saved-metric-label" style="margin:0;">Cities in Wishlist</span>
+        </div>
+        <div class="saved-metric-value" id="metric-cities">3 Cities</div>
+        <span style="font-size:11px;color:var(--text-muted);margin-top:2px;" id="metric-cities-list">Goa, Delhi, Jaipur</span>
+      </div>
+
+      <!-- Metric 4: API Sync State -->
+      <div class="saved-metric-card" style="background:#F0FDF4;border-color:#86EFAC;">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+          <span style="font-size:18px;">⚡</span>
+          <span class="saved-metric-label" style="color:#166534;margin:0;">API Sync State</span>
+        </div>
+        <div class="saved-metric-value" style="font-size:18px;color:#15803D;display:flex;align-items:center;gap:6px;">
+          <span>●</span> Ready for Project 1 Export
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Tabs & Empty State Tester -->
+    <div class="saved-tabs-row">
+      <div class="saved-tab-btns">
+        <button class="saved-tab-btn active" data-tab="all" id="tab-all-saved">All Saved (4)</button>
+        <button class="saved-tab-btn" data-tab="experiences" id="tab-experiences">Experiences (3)</button>
+        <button class="saved-tab-btn" data-tab="restaurants" id="tab-restaurants">Restaurants (1)</button>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button class="btn btn-ghost btn-sm" id="btn-toggle-empty-state" style="font-size:13px;border:1px dashed var(--border);border-radius:20px;">
+          Preview Empty State
+        </button>
+        <span style="font-size:13px;color:var(--text-muted);">Sort: <strong>Recently Added</strong></span>
+      </div>
+    </div>
+
+    <!-- Saved Items Grid -->
+    <div class="experiences-grid" id="saved-cards-grid">
+      <!-- Dynamically filled with saved experiences and restaurants -->
+    </div>
+
+    <!-- Connected to Project 1 (Smart Travel Planner) Card (Screenshot 13) -->
+    <div class="project1-integration-panel">
+      <div class="project1-header">
+        <div>
+          <div class="project1-title">
+            <span style="width:28px;height:28px;background:var(--primary);color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;">⇄</span>
+            <span>Connected to Project 1 (Smart Travel Planner)</span>
+          </div>
+          <p style="font-size:14px;color:var(--text-muted);margin-top:4px;">
+            Your saved items can be imported into your custom itinerary via <code>GET /api/saved/experiences</code> to integrate straight into automated scheduling.
+          </p>
+        </div>
+        <span class="pill-badge pill-badge-teal" style="font-size:11px;">FastAPI Cross-Project Bridge</span>
+      </div>
+
+      <div class="api-curl-box">
+        <div>
+          <span style="color:#94A3B8;">GET</span>
+          <span style="color:#F1F5F9;margin-left:8px;">/api/saved/experiences</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <button class="btn btn-secondary btn-sm" id="btn-copy-curl" style="padding:2px 8px;font-size:11px;background:#1E293B;color:#38BDF8;border-color:#334155;">Copy cURL</button>
+          <a href="/docs" target="_blank" style="color:#F59E0B;font-size:11px;text-decoration:underline;">Swagger /docs</a>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:1rem;font-size:13px;">
+
+      <div style="display:flex;align-items:center;gap:1.5rem;color:var(--text-muted);">
+        <button
+          class="btn btn-secondary btn-sm"
+          id="btn-view-live-json"
+          style="border-radius:20px;padding:4px 12px;"
+          type="button">
+          🔍 Live JSON Payload format
+        </button>
+
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span>🔒</span>
+          Bearer Session Token Handshake
+        </div>
+      </div>
+
+      <div style="color:var(--text-muted);font-size:12px;">
+        FastAPI OpenAPI Specification: 3.1
+      </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/saved.js"></script>
+</body>
+</html>
+

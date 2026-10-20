@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience Details — Explorely</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Explorely</span>
+          <span class="brand-tag">Curated India</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="explore.html" class="nav-link active">Explore</a></li>
+        <li><a href="/destinations.html" class="nav-link">Destinations</a></li>
+        <li><a href="/categories.html" class="nav-link">Categories</a></li>
+        <li>
+          <a href="saved.html" class="nav-link">
+            Saved <span class="nav-saved-count">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="details-content-container">
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs-bar" id="breadcrumbs-bar">
+      <a href="index.html">Home</a> &gt;
+      <a href="explore.html">Explore</a> &gt;
+      <span>Loading...</span>
+    </div>
+
+    <!-- Experience Heading -->
+    <div class="details-header-row">
+      <div>
+        <h1 class="details-title" id="details-title">Loading experience...</h1>
+        <div class="details-meta-line" id="details-meta-line"></div>
+      </div>
+
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <button class="btn btn-secondary" id="details-save-btn" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span>Save Experience</span>
+        </button>
+
+        <button
+          class="btn btn-secondary btn-icon"
+          id="share-experience-btn"
+          type="button"
+          title="Share experience"
+          aria-label="Share experience">
+          🔗
+        </button>
+      </div>
+    </div>
+
+    <!-- Image Gallery -->
+    <div id="gallery-container"></div>
+
+    <!-- Experience Content -->
+    <div class="details-main-grid">
+
+      <section>
+        <!-- Experience specifications -->
+        <div id="specs-container"></div>
+
+        <!-- About -->
+        <div class="details-section-block">
+          <h2 class="details-section-title">About the Experience</h2>
+          <p id="about-description-text"
+             style="font-size:15px;line-height:1.7;color:var(--on-surface-variant);margin-bottom:1.5rem;"></p>
+
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:1rem;color:var(--on-surface);">
+            What's Included &amp; Highlights
+          </h3>
+          <ul id="highlights-list" style="list-style:none;margin-bottom:2rem;"></ul>
+        </div>
+
+        <!-- Itinerary -->
+        <div class="details-section-block">
+          <h2 class="details-section-title">Itinerary Timeline</h2>
+          <div class="timeline-list" id="itinerary-timeline-list"></div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="details-section-block">
+          <h2 class="details-section-title">Traveler Reviews</h2>
+          <div class="reviews-summary-card" id="reviews-summary-card"></div>
+          <div class="reviews-list" id="reviews-list-container"></div>
+
+          <div class="write-review-card">
+            <h3 style="font-size:18px;font-weight:700;margin-bottom:0.5rem;">
+              Leave Your Review
+            </h3>
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:1.25rem;">
+              Share your experience to help fellow explorers travel better.
+            </p>
+
+            <form id="leave-review-form">
+              <div class="input-field-group" style="margin-bottom:1rem;">
+                <label class="input-label" for="star-rating-selector">Select Your Rating</label>
+                <div class="star-rating-selector" id="star-rating-selector">
+                  <span data-rating="1" class="active">★</span>
+                  <span data-rating="2" class="active">★</span>
+                  <span data-rating="3" class="active">★</span>
+                  <span data-rating="4" class="active">★</span>
+                  <span data-rating="5" class="active">★</span>
+                </div>
+              </div>
+
+              <div class="input-field-group" style="margin-bottom:1rem;">
+                <label class="input-label" for="review-author-input">Your Name</label>
+                <input
+                  type="text"
+                  id="review-author-input"
+                  class="input-control"
+                  placeholder="Enter your name"
+                  required>
+              </div>
+
+              <div class="input-field-group" style="margin-bottom:1.25rem;">
+                <label class="input-label" for="review-comment-input">Your Review</label>
+                <textarea
+                  id="review-comment-input"
+                  class="input-control"
+                  rows="4"
+                  placeholder="Share your thoughts about this experience..."
+                  required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">
+                Submit Review
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Discovery Card: pricing retained, booking removed -->
+      <aside>
+        <div class="sticky-booking-card discovery-card" style="padding:1.5rem;">
+
+          <div class="discovery-price-block" style="padding-bottom:1rem;border-bottom:1px solid var(--border);margin-bottom:1.25rem;">
+            <span style="font-size:13px;color:var(--text-muted);">Experience Price</span>
+            <div style="display:flex;align-items:baseline;gap:0.4rem;flex-wrap:wrap;margin-top:0.25rem;">
+              <span id="discovery-price"
+                    style="font-size:28px;font-weight:800;color:var(--on-surface);">
+                Loading price...
+              </span>
+              <span style="font-size:14px;font-weight:600;color:var(--text-muted);">
+                per person
+              </span>
+            </div>
+            <span style="font-size:12px;color:var(--text-muted);">
+              Price shown for one person; confirm inclusions before visiting.
+            </span>
+          </div>
+
+          <h2 style="font-size:20px;margin-bottom:0.75rem;">Plan Your Visit</h2>
+          <p style="font-size:14px;line-height:1.7;color:var(--text-muted);">
+            Discover the highlights, explore the location, and save this
+            experience for your next trip.
+          </p>
+
+          <div class="visit-info" style="margin-top:1.25rem;">
+            <h3 style="font-size:15px;margin-bottom:0.5rem;">Before You Go</h3>
+            <p style="font-size:13px;line-height:1.7;color:var(--text-muted);">
+              Check local conditions, opening hours, entry requirements,
+              and travel arrangements before visiting.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="details-save-btn-sidebar"
+            style="width:100%;margin-top:1.25rem;">
+            ♡ Add to Wishlist
+          </button>
+
+          <a href="explore.html"
+             class="btn btn-secondary"
+             style="display:block;text-align:center;width:100%;margin-top:0.75rem;">
+            Explore More Experiences
+          </a>
+
+          <p class="discovery-note" style="font-size:12px;line-height:1.6;color:var(--text-muted);margin-top:1rem;">
+            Explorely helps you discover experiences. Bookings and payments
+            are not processed here.
+          </p>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Similar Experiences -->
+    <section class="section-container" style="border-top:1px solid var(--border);">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2>Similar Experiences You Might Like</h2>
+          <p>Curated recommendations in the same destination.</p>
+        </div>
+      </div>
+      <div class="experiences-grid" id="similar-experiences-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/details.js"></script>
+
+  <!-- Share button -->
+  <script>
+    document.getElementById('share-experience-btn').addEventListener('click', async () => {
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: document.title,
+            url: window.location.href
+          });
+        } else {
+          await navigator.clipboard.writeText(window.location.href);
+          if (typeof window.showToast === 'function') {
+            window.showToast('Page link copied to clipboard!');
+          }
+        }
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          console.error('Could not share link:', error);
+        }
+      }
+    });
+
+    // Keep the displayed price synchronized with the experience data.
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id') || '1', 10);
+        const experience = await window.ExplorelyAPI.getExperienceById(id);
+
+        const priceElement = document.getElementById('discovery-price');
+
+        if (priceElement && experience) {
+          const price = experience.price;
+
+          priceElement.textContent =
+            price !== null && price !== undefined && price !== ''
+              ? (window.formatINR
+                  ? window.formatINR(price)
+                  : '₹' + Number(price).toLocaleString('en-IN'))
+              : 'Price unavailable';
+        }
+      } catch (error) {
+        console.error('Could not load experience price:', error);
+      }
+    });
+
+    // Sidebar wishlist button uses the existing main wishlist button.
+    document.getElementById('details-save-btn-sidebar').addEventListener('click', () => {
+      const mainSaveButton = document.getElementById('details-save-btn');
+      if (mainSaveButton) mainSaveButton.click();
+    });
+  </script>
+
+</body>
+</html>

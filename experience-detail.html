@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience Details — Explorely</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Explorely</span>
+          <span class="brand-tag">Curated India</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="explore.html" class="nav-link active">Explore</a></li>
+        <li><a href="/destinations.html" class="nav-link">Destinations</a></li>
+        <li><a href="/categories.html" class="nav-link">Categories</a></li>
+        <li>
+          <a href="saved.html" class="nav-link">
+            Saved <span class="nav-saved-count">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="mode-indicator-pill" title="Click to view API status and toggle mode">
+          <span class="mode-dot"></span>
+          <span class="mode-text">Standalone Mode</span>
+        </div>
+
+        <div class="user-profile-menu">
+          <button class="user-avatar-btn" id="user-profile-btn">
+            <div class="avatar-circle">AS</div>
+            <span class="user-display-name">Ananya S.</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="modal-card" id="profile-dropdown" style="display:none;position:absolute;right:0;top:48px;width:200px;padding:0.75rem;box-shadow:var(--shadow-level-3);z-index:101;">
+            <a href="saved.html" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:13px;font-weight:600;">Saved Items</a>
+            <div style="border-top:1px solid var(--border);margin:0.4rem 0;"></div>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container" id="details-content-container">
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs-bar" id="breadcrumbs-bar">
+      <a href="index.html">Home</a> &gt; <a href="explore.html">Explore</a> &gt; <span>Loading...</span>
+    </div>
+
+    <!-- Details Header Row -->
+    <div class="details-header-row">
+      <div>
+        <h1 class="details-title" id="details-title">Loading experience...</h1>
+        <div class="details-meta-line" id="details-meta-line"></div>
+      </div>
+
+      <div style="display:flex;gap:0.75rem;">
+        <button class="btn btn-secondary" id="details-save-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span>Save Experience</span>
+        </button>
+        <button class="btn btn-secondary btn-icon" onclick="navigator.clipboard.writeText(window.location.href);window.showToast('Page link copied to clipboard!')" title="Share experience">
+          🔗
+        </button>
+      </div>
+    </div>
+
+    <!-- Image Gallery Collage -->
+    <div id="gallery-container"></div>
+
+    <!-- Main Content Grid: Left Details + Right Sticky Booking Card -->
+    <div class="details-main-grid">
+
+      <!-- Left Column: Specs, Narrative, Timeline, Location, Reviews -->
+      <section>
+        <!-- Specs Strip -->
+        <div id="specs-container"></div>
+
+        <!-- About Experience Section -->
+        <div class="details-section-block">
+          <h2 class="details-section-title">About the Experience</h2>
+          <p id="about-description-text" style="font-size:15px;line-height:1.7;color:var(--on-surface-variant);margin-bottom:1.5rem;"></p>
+
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:1rem;color:var(--on-surface);">What's Included & Highlights</h3>
+          <ul id="highlights-list" style="list-style:none;margin-bottom:2rem;"></ul>
+        </div>
+
+        <!-- Itinerary Timeline -->
+        <div class="details-section-block">
+          <h2 class="details-section-title">Itinerary Timeline</h2>
+          <div class="timeline-list" id="itinerary-timeline-list"></div>
+        </div>
+
+        <!-- Traveler Reviews Section -->
+        <div class="details-section-block">
+          <h2 class="details-section-title">Traveler Reviews</h2>
+          <div class="reviews-summary-card" id="reviews-summary-card"></div>
+          <div class="reviews-list" id="reviews-list-container"></div>
+
+          <!-- Leave Your Review Form -->
+          <div class="write-review-card">
+            <h3 style="font-size:18px;font-weight:700;margin-bottom:0.5rem;">Leave Your Review</h3>
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:1.25rem;">Share your experience to help fellow explorers travel better.</p>
+
+            <form id="leave-review-form">
+              <div class="input-field-group" style="margin-bottom:1rem;">
+                <label class="input-label">Select Your Rating</label>
+                <div class="star-rating-selector" id="star-rating-selector">
+                  <span data-rating="1" class="active">★</span>
+                  <span data-rating="2" class="active">★</span>
+                  <span data-rating="3" class="active">★</span>
+                  <span data-rating="4" class="active">★</span>
+                  <span data-rating="5" class="active">★</span>
+                </div>
+              </div>
+
+              <div class="input-field-group" style="margin-bottom:1rem;">
+                <label class="input-label">Your Name</label>
+                <input type="text" id="review-author-input" class="input-control" placeholder="e.g. Priya M." required>
+              </div>
+
+              <div class="input-field-group" style="margin-bottom:1.25rem;">
+                <label class="input-label">Review Experience</label>
+                <textarea id="review-comment-input" class="input-control" rows="4" placeholder="How was the guide, safety, and scenery? What tips would you give?" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">
+                Submit Verified Review
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Sticky Booking Card -->
+      <aside>
+        <div class="sticky-booking-card" id="sticky-booking-card">
+          <!-- Filled dynamically via details.js -->
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Similar Experiences Section -->
+    <section class="section-container" style="border-top:1px solid var(--border);">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2>Similar Experiences You Might Like</h2>
+          <p>Curated recommendations in the same destination.</p>
+        </div>
+      </div>
+      <div class="experiences-grid" id="similar-experiences-grid"></div>
+    </section>
+
+  </main>
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/details.js"></script>
+</body>
+</html>
+

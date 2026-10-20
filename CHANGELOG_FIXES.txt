@@ -1,0 +1,20 @@
+Explorely targeted fixes
+========================
+
+Only the requested areas were changed:
+- Added login.html and signup.html templates wired to the existing ExplorelyAPI auth helpers.
+- Registered the existing /api/auth routes with FastAPI.
+- Changed auth success redirects to return to explore.html when there is no `next` URL (profile.html is not present in this project).
+- Replaced the static Dates & Guests text field with a working date/guest picker on the Explore page.
+- Date and guest choices are reflected in the label and persisted as URL parameters when Update Search is pressed.
+- Removed redundant unused app/static/js copies, generated Python caches, and an old database backup from this cleaned package.
+
+Run from the project root:
+  python -m uvicorn app.main:app --reload --port 8001
+
+Then open:
+  http://127.0.0.1:8001/explore.html
+  http://127.0.0.1:8001/login.html
+  http://127.0.0.1:8001/signup.html
+
+Security note: local .env files are intentionally not included in this ZIP. Recreate your local environment settings if needed. The live explorely.db file is retained.

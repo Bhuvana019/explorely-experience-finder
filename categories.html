@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Categories & Themes — Curated Collections | Explorely</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Explorely</span>
+          <span class="brand-tag">Curated India</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="explore.html" class="nav-link">Explore</a></li>
+        <li><a href="destinations.html" class="nav-link">Destinations</a></li>
+        <li><a href="categories.html" class="nav-link active">Categories</a></li>
+        <li>
+          <a href="saved.html" class="nav-link">
+            Saved <span class="nav-saved-count">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- API / Standalone Mode Pill -->
+        <div class="mode-indicator-pill" title="Click to view API status and toggle mode">
+          <span class="mode-dot"></span>
+          <span class="mode-text">Standalone Mode</span>
+        </div>
+
+        <!-- User Profile Menu -->
+        <div class="user-profile-menu">
+          <button class="user-avatar-btn" id="user-profile-btn">
+            <div class="avatar-circle">AS</div>
+            <span class="user-display-name">Ananya S.</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="modal-card" id="profile-dropdown" style="display:none;position:absolute;right:0;top:48px;width:200px;padding:0.75rem;box-shadow:var(--shadow-level-3);z-index:101;">
+            <a href="saved.html" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:13px;font-weight:600;">Saved Items</a>
+            <div style="border-top:1px solid var(--border);margin:0.4rem 0;"></div>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="category-hero-section">
+    <div class="container hero-content">
+      <div class="dest-hero-badge" style="background:#FEF3C7;color:#92400E;border-color:rgba(245,158,11,0.3);">
+        <span>🎨</span> Thematic Travel Styles
+      </div>
+      <h1 class="display-hero">Discover by Travel Category</h1>
+      <p class="hero-subtitle">
+        Whether you crave the thrill of diving coral reefs, centuries-old royal palaces, legendary midnight street-food trails, or sunset catamaran breezes—find experiences crafted for your travel rhythm.
+      </p>
+
+      <!-- Quick Category Jump Buttons -->
+      <div class="category-quick-nav">
+        <button class="cat-nav-btn" data-target="adventure">
+          <span>🏄‍♂️</span> Adventure
+        </button>
+        <button class="cat-nav-btn" data-target="historical">
+          <span>🏛️</span> Historical & Heritage
+        </button>
+        <button class="cat-nav-btn" data-target="food">
+          <span>🍛</span> Culinary & Food
+        </button>
+        <button class="cat-nav-btn" data-target="beach">
+          <span>🏖️</span> Beach & Leisure
+        </button>
+        <button class="cat-nav-btn" data-target="nature">
+          <span>🌿</span> Nature & Wildlife
+        </button>
+        <button class="cat-nav-btn" data-target="nightlife">
+          <span>🍸</span> Nightlife & Craft
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- Interactive Travel Style Finder Quiz -->
+    <section class="style-quiz-card" id="travel-style-quiz">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+        <span style="font-size:24px;">🧭</span>
+        <div>
+          <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.02em;">Find Your Travel Vibe in 3 Taps</h2>
+          <p style="font-size:13.5px;color:#D1FAE5;margin:0;">Not sure which style matches your upcoming holiday? Answer 3 quick preferences:</p>
+        </div>
+      </div>
+
+      <div class="quiz-steps-row">
+        <!-- Step 1 -->
+        <div class="quiz-step-item">
+          <label>Step 1: Your Energy & Pace</label>
+          <div class="quiz-pill-options">
+            <button class="quiz-pill-btn active" data-key="energy" data-val="high">⚡ High Adrenaline & Thrills</button>
+            <button class="quiz-pill-btn" data-key="energy" data-val="chill">🧘 Serene, Calm & Relaxed</button>
+            <button class="quiz-pill-btn" data-key="energy" data-val="culture">📖 Cultured, Curious & Historic</button>
+            <button class="quiz-pill-btn" data-key="energy" data-val="food">🍽️ Foodie & Heirloom Flavors</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="quiz-step-item">
+          <label>Step 2: Who is Traveling?</label>
+          <div class="quiz-pill-options">
+            <button class="quiz-pill-btn active" data-key="who" data-val="solo">🎒 Solo Traveler</button>
+            <button class="quiz-pill-btn" data-key="who" data-val="couple">💑 Romantic Couple</button>
+            <button class="quiz-pill-btn" data-key="who" data-val="friends">👥 Friends Crew</button>
+            <button class="quiz-pill-btn" data-key="who" data-val="family">👨‍👩‍👧 Family & Multi-gen</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="quiz-step-item">
+          <label>Step 3: Preferred Landscape</label>
+          <div class="quiz-pill-options">
+            <button class="quiz-pill-btn active" data-key="env" data-val="ocean">🌊 Tropical Arabian Shores</button>
+            <button class="quiz-pill-btn" data-key="env" data-val="forts">🏰 Royal Palaces & Fortresses</button>
+            <button class="quiz-pill-btn" data-key="env" data-val="mountains">🏔️ Mist & Mountain Peaks</button>
+            <button class="quiz-pill-btn" data-key="env" data-val="forests">🌿 Rainforests & Mangroves</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Quiz Result Banner -->
+      <div class="quiz-result-banner">
+        <div>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--primary);letter-spacing:0.05em;">YOUR RECOMMENDED TRAVEL CATEGORY</span>
+          <h3 id="quiz-result-category-title" style="font-size:20px;font-weight:800;color:var(--on-surface);margin:0.2rem 0;">Adventure & High Adrenaline</h3>
+          <p id="quiz-result-category-desc" style="font-size:13px;color:var(--text-muted);margin:0;">High-adrenaline water sports and alpine thrills matched to your active energy level.</p>
+        </div>
+        <button id="quiz-result-btn" class="btn btn-primary" style="white-space:nowrap;">
+          Jump to Curated Collection &darr;
+        </button>
+      </div>
+    </section>
+
+    <!-- Category Collection 1: ADVENTURE -->
+    <section class="theme-collection-card" id="cat-section-adventure">
+      <div class="theme-header-row">
+        <div class="theme-title-wrap">
+          <div class="theme-icon-box" style="background:#ECFDF5;color:#059669;border-color:#A7F3D0;">🏄‍♂️</div>
+          <div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span class="pill-badge pill-badge-teal">CATEGORY 01</span>
+              <span style="font-size:12px;color:var(--text-muted);font-weight:600;">8 Experiences across 3 Regions</span>
+            </div>
+            <h2 style="font-size:26px;font-weight:800;color:var(--on-surface);margin:0.25rem 0;">Adventure & Water Sports</h2>
+            <p style="font-size:14.5px;color:var(--on-surface-variant);margin:0;">
+              From plunging into crystalline coral reefs off Grand Island to leaping 55 meters above Mayem Lake and soaring on tandem paragliders above Himalayan cedar forests.
+            </p>
+          </div>
+        </div>
+        <a href="/categories.html" class="btn btn-secondary btn-sm" style="white-space:nowrap;">
+          Search All Adventure &rarr;
+        </a>
+      </div>
+
+      <div class="theme-meta-badges-row">
+        <span class="pill-badge pill-badge-glass">⚡ Intensity: High Adrenaline</span>
+        <span class="pill-badge pill-badge-glass">🎯 Ideal For: Thrill Seekers & Active Groups</span>
+        <span class="pill-badge pill-badge-glass">💰 Price Spectrum: ₹1,450 – ₹8,500</span>
+        <span class="pill-badge pill-badge-teal">📍 Prime Hubs: Goa, Manali, Jaipur</span>
+      </div>
+
+      <!-- Live Experience Mini-Grid (loaded via api.js) -->
+      <div class="theme-experiences-grid" id="cat-grid-adventure">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Category Collection 2: HISTORICAL -->
+    <section class="theme-collection-card" id="cat-section-historical">
+      <div class="theme-header-row">
+        <div class="theme-title-wrap">
+          <div class="theme-icon-box" style="background:#FFFBEB;color:#D97706;border-color:#FDE68A;">🏛️</div>
+          <div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span class="pill-badge pill-badge-amber">CATEGORY 02</span>
+              <span style="font-size:12px;color:var(--text-muted);font-weight:600;">5 Experiences across 4 Regions</span>
+            </div>
+            <h2 style="font-size:26px;font-weight:800;color:var(--on-surface);margin:0.25rem 0;">Historical & Heritage Walks</h2>
+            <p style="font-size:14.5px;color:var(--on-surface-variant);margin:0;">
+              Unravel stories etched in sandstone and granite: 7th-century rock-cut monolithic sanctuaries facing the Bay of Bengal, 450-yr Portuguese villas, and Jaipur's 953 honeycombed windows.
+            </p>
+          </div>
+        </div>
+        <a href="explore.html?category=Historical" class="btn btn-secondary btn-sm" style="white-space:nowrap;">
+          Search All Historical &rarr;
+        </a>
+      </div>
+
+      <div class="theme-meta-badges-row">
+        <span class="pill-badge pill-badge-glass">🚶 Intensity: Easy to Moderate Walks</span>
+        <span class="pill-badge pill-badge-glass">🎯 Ideal For: History Enthusiasts & Photographers</span>
+        <span class="pill-badge pill-badge-glass">💰 Price Spectrum: ₹850 – ₹1,600</span>
+        <span class="pill-badge pill-badge-amber">📍 Prime Hubs: Jaipur, Goa, Chennai, Delhi</span>
+      </div>
+
+      <div class="theme-experiences-grid" id="cat-grid-historical">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Category Collection 3: FOOD & DINING -->
+    <section class="theme-collection-card" id="cat-section-food">
+      <div class="theme-header-row">
+        <div class="theme-title-wrap">
+          <div class="theme-icon-box" style="background:#FEF2F2;color:#DC2626;border-color:#FECACA;">🍛</div>
+          <div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span class="pill-badge pill-badge-teal">CATEGORY 03</span>
+              <span style="font-size:12px;color:var(--text-muted);font-weight:600;">6 Experiences & Iconic Eateries</span>
+            </div>
+            <h2 style="font-size:26px;font-weight:800;color:var(--on-surface);margin:0.25rem 0;">Culinary & Food Trails</h2>
+            <p style="font-size:14.5px;color:var(--on-surface-variant);margin:0;">
+              A feast for the senses: 100-year-old midnight kebab kitchens in Old Delhi, spice plantation organic banquets, royal palace Rajput thalis, and 1943 crispy ghee roast dosas.
+            </p>
+          </div>
+        </div>
+        <a href="explore.html?category=Food" class="btn btn-secondary btn-sm" style="white-space:nowrap;">
+          Search All Food &rarr;
+        </a>
+      </div>
+
+      <div class="theme-meta-badges-row">
+        <span class="pill-badge pill-badge-glass">🍽️ Intensity: Sensorial & Gastronomic</span>
+        <span class="pill-badge pill-badge-glass">🎯 Ideal For: Foodies & Cultural Explorers</span>
+        <span class="pill-badge pill-badge-glass">💰 Price Spectrum: ₹950 – ₹4,200</span>
+        <span class="pill-badge pill-badge-teal">📍 Prime Hubs: Delhi, Goa, Bangalore, Jaipur</span>
+      </div>
+
+      <div class="theme-experiences-grid" id="cat-grid-food">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Category Collection 4: BEACH & LEISURE -->
+    <section class="theme-collection-card" id="cat-section-beach">
+      <div class="theme-header-row">
+        <div class="theme-title-wrap">
+          <div class="theme-icon-box" style="background:#F0FDFA;color:#0D9488;border-color:#99F6E4;">🏖️</div>
+          <div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span class="pill-badge pill-badge-teal">CATEGORY 04</span>
+              <span style="font-size:12px;color:var(--text-muted);font-weight:600;">3 Experiences across 2 Coasts</span>
+            </div>
+            <h2 style="font-size:26px;font-weight:800;color:var(--on-surface);margin:0.25rem 0;">Beach & Coastal Leisure</h2>
+            <p style="font-size:14.5px;color:var(--on-surface-variant);margin:0;">
+              Savor the coastal breeze: twin-hull luxury catamaran sunset cruises with live acoustic Konkani folk music, and dawn cycling along Mumbai's iconic Queen's Necklace promenade.
+            </p>
+          </div>
+        </div>
+        <a href="explore.html?category=Beach %26 Leisure" class="btn btn-secondary btn-sm" style="white-space:nowrap;">
+          Search All Beach &rarr;
+        </a>
+      </div>
+
+      <div class="theme-meta-badges-row">
+        <span class="pill-badge pill-badge-glass">⛵ Intensity: Relaxed & Scenic</span>
+        <span class="pill-badge pill-badge-glass">🎯 Ideal For: Couples, Sunset Lovers & Leisure Groups</span>
+        <span class="pill-badge pill-badge-glass">💰 Price Spectrum: ₹1,199 – ₹1,800</span>
+        <span class="pill-badge pill-badge-teal">📍 Prime Hubs: Goa, Mumbai, Chennai</span>
+      </div>
+
+      <div class="theme-experiences-grid" id="cat-grid-beach">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Category Collection 5: NATURE & WILDLIFE -->
+    <section class="theme-collection-card" id="cat-section-nature">
+      <div class="theme-header-row">
+        <div class="theme-title-wrap">
+          <div class="theme-icon-box" style="background:#F0FDF4;color:#16A34A;border-color:#BBF7D0;">🌿</div>
+          <div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span class="pill-badge pill-badge-teal">CATEGORY 05</span>
+              <span style="font-size:12px;color:var(--text-muted);font-weight:600;">2 Deep Nature Expeditions</span>
+            </div>
+            <h2 style="font-size:26px;font-weight:800;color:var(--on-surface);margin:0.25rem 0;">Nature & Wildlife Sanctuaries</h2>
+            <p style="font-size:14.5px;color:var(--on-surface-variant);margin:0;">
+              Escape human bustle into tranquil backwater estuaries: paddle through silent tidal mangrove labyrinths spotting river otters, or trek deep into the Western Ghats rainforest canopy.
+            </p>
+          </div>
+        </div>
+        <a href="explore.html?category=Nature" class="btn btn-secondary btn-sm" style="white-space:nowrap;">
+          Search All Nature &rarr;
+        </a>
+      </div>
+
+      <div class="theme-meta-badges-row">
+        <span class="pill-badge pill-badge-glass">🛶 Intensity: Moderate Eco-Trails</span>
+        <span class="pill-badge pill-badge-glass">🎯 Ideal For: Birders, Wildlife Lovers & Solo Trekkers</span>
+        <span class="pill-badge pill-badge-glass">💰 Price Spectrum: ₹1,450 – ₹2,600</span>
+        <span class="pill-badge pill-badge-teal">📍 Prime Hubs: South Goa, Western Ghats</span>
+      </div>
+
+      <div class="theme-experiences-grid" id="cat-grid-nature">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Category Collection 6: NIGHTLIFE & CRAFT -->
+    <section class="theme-collection-card" id="cat-section-nightlife">
+      <div class="theme-header-row">
+        <div class="theme-title-wrap">
+          <div class="theme-icon-box" style="background:#F5F3FF;color:#7C3AED;border-color:#DDD6FE;">🍸</div>
+          <div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span class="pill-badge pill-badge-teal">CATEGORY 06</span>
+              <span style="font-size:12px;color:var(--text-muted);font-weight:600;">Craft Taprooms & Music Cruises</span>
+            </div>
+            <h2 style="font-size:26px;font-weight:800;color:var(--on-surface);margin:0.25rem 0;">Nightlife, Pubs & Social Scenes</h2>
+            <p style="font-size:14.5px;color:var(--on-surface-variant);margin:0;">
+              Discover India's craft beer revolution in Bangalore with private brewhouse fermentation tours, sunset acoustic deck sessions in Goa, and live DJ cocktail lounges.
+            </p>
+          </div>
+        </div>
+        <a href="explore.html?category=Nightlife" class="btn btn-secondary btn-sm" style="white-space:nowrap;">
+          Search All Nightlife &rarr;
+        </a>
+      </div>
+
+      <div class="theme-meta-badges-row">
+        <span class="pill-badge pill-badge-glass">🍻 Intensity: Lively & Social</span>
+        <span class="pill-badge pill-badge-glass">🎯 Ideal For: Craft Beer Enthusiasts & Night Owls</span>
+        <span class="pill-badge pill-badge-glass">💰 Price Spectrum: ₹1,200 – ₹2,500</span>
+        <span class="pill-badge pill-badge-teal">📍 Prime Hubs: Bangalore, Goa</span>
+      </div>
+
+      <div class="theme-experiences-grid" id="cat-grid-nightlife">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Cross-links Discovery Strip -->
+    <div class="explore-modes-switcher-bar">
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <span style="font-size:20px;">📍</span>
+        <span>Looking to explore by specific Indian cities and travel destinations?</span>
+      </div>
+      <div style="display:flex;gap:0.75rem;">
+        <a href="destinations.html" class="btn btn-secondary btn-sm">Explore Destinations Hub &rarr;</a>
+        <a href="explore.html" class="btn btn-primary btn-sm">Universal Experience Search &rarr;</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/categories.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explorely — Discover places. Find experiences. Travel better.</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Explorely</span>
+          <span class="brand-tag">Curated India</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="explore.html" class="nav-link">Explore</a></li>
+        <li><a href="/destinations.html" class="nav-link">Destinations</a></li>
+        <li><a href="/categories.html" class="nav-link">Categories</a></li>
+        <li><a href="integration.html" class="nav-link" style="color: #2563eb; font-weight: 700;">⚡ Partner API Monitor</a></li>
+        <li>
+          <a href="saved.html" class="nav-link">
+            Saved <span class="nav-saved-count">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- API / Standalone Mode Pill -->
+        <a href="integration.html" style="text-decoration: none;">
+          <div class="mode-indicator-pill" title="Click to view Live Partner API Monitor">
+            <span class="mode-dot"></span>
+            <span class="mode-text">Partner API (:8001)</span>
+          </div>
+        </a>
+
+        <!-- User Profile Menu -->
+        <div class="user-profile-menu">
+          <button class="user-avatar-btn" id="user-profile-btn">
+            <div class="avatar-circle">AS</div>
+            <span class="user-display-name">Ananya S.</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="modal-card" id="profile-dropdown" style="display:none;position:absolute;right:0;top:48px;width:200px;padding:0.75rem;box-shadow:var(--shadow-level-3);z-index:101;">
+            <a href="saved.html" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:13px;font-weight:600;">Saved Items</a>
+            <div style="border-top:1px solid var(--border);margin:0.4rem 0;"></div>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Unified Search Bar -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <h1 class="display-hero">Discover your next experience.</h1>
+      <p class="hero-subtitle">
+        Curated travel discovery across India's vibrant landscapes—from coastal backwaters to historic palaces and mountain peaks.
+      </p>
+
+      <!-- Unified Floating 3-Segment Search Bar -->
+      <form class="unified-search-bar" action="explore.html" method="GET">
+        <!-- Segment 1: Destination -->
+        <div class="search-segment">
+          <span class="search-segment-label">Destination</span>
+          <input type="text" name="destination" class="search-segment-input search-destination-input" placeholder="Where do you want to explore?" value="Goa, India">
+        </div>
+
+        <div class="search-divider"></div>
+
+        <!-- Segment 2: Category -->
+        <div class="search-segment">
+          <span class="search-segment-label">Category</span>
+          <select name="category" class="search-segment-input search-category-select" style="cursor:pointer;background:transparent;">
+            <option value="All Categories">All Categories</option>
+            <option value="Adventure">Adventure & Water Sports</option>
+            <option value="Beach & Leisure">Beach & Coastal Trails</option>
+            <option value="Historical">Historical & Heritage Walks</option>
+            <option value="Food">Food & Dining Trails</option>
+            <option value="Nature">Nature & Wildlife</option>
+            <option value="Nightlife">Nightlife & Sunset Cruises</option>
+          </select>
+        </div>
+
+        <div class="search-divider"></div>
+
+        <!-- Segment 3: Dates & Guests -->
+        <div class="search-segment">
+          <span class="search-segment-label">Dates & Guests</span>
+          <input type="text" class="search-segment-input" placeholder="Anytime • 2 Guests" readonly style="cursor:pointer;" onclick="window.location.href='explore.html'">
+        </div>
+
+        <!-- Search Action Button -->
+        <button type="submit" class="search-submit-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span>Search</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Popular Destinations Section -->
+  <section class="section-container">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2>Popular Destinations</h2>
+          <p>Handpicked regions rich in cultural heritage, coastal beauty, and thrill.</p>
+        </div>
+        <a href="explore.html" class="btn btn-ghost">View All Destinations &rarr;</a>
+      </div>
+
+      <div class="destination-grid">
+        <div class="destination-card" onclick="window.location.href='explore.html?destination=Goa'">
+          <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80" alt="Goa">
+          <div class="destination-overlay">
+            <span class="destination-name">Goa</span>
+            <span class="destination-meta">24 Experiences</span>
+          </div>
+        </div>
+
+        <div class="destination-card" onclick="window.location.href='explore.html?destination=Jaipur'">
+          <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=600&q=80" alt="Jaipur">
+          <div class="destination-overlay">
+            <span class="destination-name">Jaipur</span>
+            <span class="destination-meta">18 Experiences</span>
+          </div>
+        </div>
+
+        <div class="destination-card" onclick="window.location.href='explore.html?destination=Chennai'">
+          <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80" alt="Chennai">
+          <div class="destination-overlay">
+            <span class="destination-name">Chennai</span>
+            <span class="destination-meta">14 Experiences</span>
+          </div>
+        </div>
+
+        <div class="destination-card" onclick="window.location.href='explore.html?destination=Bangalore'">
+          <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=600&q=80" alt="Bangalore">
+          <div class="destination-overlay">
+            <span class="destination-name">Bangalore</span>
+            <span class="destination-meta">16 Experiences</span>
+          </div>
+        </div>
+
+        <div class="destination-card" onclick="window.location.href='explore.html?destination=Delhi'">
+          <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=600&q=80" alt="Delhi">
+          <div class="destination-overlay">
+            <span class="destination-name">Delhi</span>
+            <span class="destination-meta">20 Experiences</span>
+          </div>
+        </div>
+
+        <div class="destination-card" onclick="window.location.href='explore.html?destination=Manali'">
+          <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=600&q=80" alt="Manali">
+          <div class="destination-overlay">
+            <span class="destination-name">Manali</span>
+            <span class="destination-meta">12 Experiences</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Experiences Section -->
+  <section class="section-container" style="background-color: var(--surface-bright); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2>Popular Experiences</h2>
+          <p>Top-rated adventures, cultural walks, and coastal expeditions verified by travelers.</p>
+        </div>
+        <a href="explore.html" class="btn btn-secondary btn-sm">Explore All &rarr;</a>
+      </div>
+
+      <div class="experiences-grid" id="home-featured-experiences-grid">
+        <!-- Rendered dynamically from API / Seed Catalog -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Browse by Category Section -->
+  <section class="section-container">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2>Browse by Category</h2>
+          <p>Find the perfect journey matched to your travel curiosity.</p>
+        </div>
+      </div>
+
+      <div class="category-chips-grid">
+        <div class="category-chip-item" onclick="window.location.href='explore.html?category=Adventure'">
+          <div class="category-icon-circle">🏄‍♂️</div>
+          <span class="category-chip-title">Adventure</span>
+        </div>
+
+        <div class="category-chip-item" onclick="window.location.href='explore.html?category=Beach & Leisure'">
+          <div class="category-icon-circle">🏖️</div>
+          <span class="category-chip-title">Beach & Coastal</span>
+        </div>
+
+        <div class="category-chip-item" onclick="window.location.href='explore.html?category=Nature'">
+          <div class="category-icon-circle">🌿</div>
+          <span class="category-chip-title">Nature</span>
+        </div>
+
+        <div class="category-chip-item" onclick="window.location.href='explore.html?category=Historical'">
+          <div class="category-icon-circle">🏛️</div>
+          <span class="category-chip-title">Historical</span>
+        </div>
+
+        <div class="category-chip-item" onclick="window.location.href='explore.html?category=Food'">
+          <div class="category-icon-circle">🍛</div>
+          <span class="category-chip-title">Food & Dining</span>
+        </div>
+
+        <div class="category-chip-item" onclick="window.location.href='explore.html?category=Shopping'">
+          <div class="category-icon-circle">🛍️</div>
+          <span class="category-chip-title">Bazaars</span>
+        </div>
+
+        <div class="category-chip-item" onclick="window.location.href='explore.html?category=Nightlife'">
+          <div class="category-icon-circle">🍸</div>
+          <span class="category-chip-title">Nightlife</span>
+        </div>
+
+        <div class="category-chip-item" onclick="window.location.href='explore.html?category=Family'">
+          <div class="category-icon-circle">👨‍👩‍👧‍👦</div>
+          <span class="category-chip-title">Family</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Initialize Home Featured Cards
+    document.addEventListener('DOMContentLoaded', async () => {
+      const expGrid = document.getElementById('home-featured-experiences-grid');
+
+      if (expGrid) {
+        const experiences = await window.ExplorelyAPI.getExperiences({ sort_by: 'highest_rated' });
+        const featured = experiences.slice(0, 3);
+        expGrid.innerHTML = featured.map(exp => {
+          const isSaved = window.ExplorelyAPI.isExperienceSaved(exp.experience_id);
+          return `
+            <div class="experience-card">
+              <div class="card-image-wrap">
+                <img src="${exp.image_url}" alt="${exp.name}">
+                <span class="pill-badge pill-badge-teal card-badge-top-left">${exp.category.toUpperCase()}</span>
+                <button class="card-save-btn ${isSaved ? 'active' : ''}" data-experience-id="${exp.experience_id}" title="Save item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="card-location-row">
+                  <span>📍 ${exp.locality || exp.destination}</span>
+                  <span>⏱️ ${exp.duration}</span>
+                </div>
+                <h3 class="card-title"><a href="experience-detail.html?id=${exp.experience_id}">${exp.name}</a></h3>
+                <div class="card-rating-row">
+                  <span class="star-icon">★</span> ${exp.rating.toFixed(1)} (${exp.review_count} reviews)
+                </div>
+                <div class="card-footer-row">
+                  <div class="card-price-block">
+                    <span class="card-price-label">Price per person</span>
+                    <span class="card-price-value">${window.formatINR(exp.price)}</span>
+                  </div>
+                  <a href="experience-detail.html?id=${exp.experience_id}" class="btn btn-secondary btn-sm">View Details</a>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    });
+  </script>
+</body>
+</html>
+

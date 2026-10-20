@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner API Live Monitor — Explorely Experience Finder (:8001)</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    .monitor-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .status-ribbon {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #fff;
+      border-radius: 14px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+    .status-tile {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 1rem;
+      backdrop-filter: blur(8px);
+    }
+    .status-tile-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #94a3b8;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .status-tile-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .pulse-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #10b981;
+      box-shadow: 0 0 0 rgba(16, 185, 129, 0.4);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .tx-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .tx-card:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      border-color: #cbd5e1;
+    }
+    .tx-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f1f5f9;
+      margin-bottom: 1rem;
+    }
+    .tx-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .tx-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-inbound {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+    .badge-status-ok {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .tx-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .tx-pane {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .tx-pane-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .trip-summary-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .trip-metric {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+    .trip-metric:last-child {
+      border-bottom: none;
+    }
+    .trip-metric-k {
+      color: #475569;
+      font-weight: 600;
+    }
+    .trip-metric-v {
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .places-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .place-chip {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #1e293b;
+      font-size: 0.775rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+    }
+    .btn-action {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.55rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.15s ease;
+    }
+    .btn-action:hover {
+      background: #1d4ed8;
+    }
+    .btn-ghost-dark {
+      background: transparent;
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-ghost-dark:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 3.5rem 2rem;
+      background: #ffffff;
+      border: 2px dashed #cbd5e1;
+      border-radius: 14px;
+      color: #64748b;
+    }
+    .endpoint-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      background: rgba(0, 0, 0, 0.35);
+      color: #38bdf8;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body style="background: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; color: #1e293b;">
+
+  <!-- Header -->
+  <header class="site-header" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Explorely</span>
+          <span class="brand-tag">Curated India</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="explore.html" class="nav-link">Explore</a></li>
+        <li><a href="destinations.html" class="nav-link">Destinations</a></li>
+        <li><a href="categories.html" class="nav-link">Categories</a></li>
+        <li><a href="integration.html" class="nav-link active" style="color: #2563eb; font-weight: 700;">⚡ Partner API Monitor</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="mode-indicator-pill" style="border-color: #10b981;">
+          <span class="mode-dot" style="background: #10b981;"></span>
+          <span class="mode-text" style="color: #065f46; font-weight: 700;">API Active (:8001)</span>
+        </div>
+        <a href="http://localhost:8000/recommendations.html?id=101" target="_blank" class="btn-action" style="font-size: 0.8rem; text-decoration: none;">
+          Open Travel Planner (:8000) ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="monitor-container">
+
+    <!-- Topology Banner -->
+    <div class="status-ribbon">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+            <span class="pulse-dot"></span>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #34d399; letter-spacing: 0.05em; text-transform: uppercase;">
+              Live Microservice Server Active
+            </span>
+          </div>
+          <h1 style="font-size: 1.75rem; margin: 0 0 0.5rem 0; font-weight: 800;">
+            Experience Finder &bull; Partner Integration Console
+          </h1>
+          <p style="color: #94a3b8; font-size: 0.925rem; margin: 0; max-width: 720px; line-height: 1.5;">
+            This monitor shows server-to-server HTTP API calls received from <strong>Smart Travel Planner (:8000)</strong>. 
+            When a user clicks "⚡ Get Recommendations" in Travel Planner, Experience Finder receives the trip summary 
+            (destination, members, budget), searches <code>explorely.db</code>, and dispatches verified places.
+          </p>
+          <div class="endpoint-code">
+            Listening on GET http://localhost:8001/api/experiences
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+          <button class="btn-ghost-dark" onclick="fetchLiveRequests()">
+            🔄 Refresh Feed
+          </button>
+          <button class="btn-ghost-dark" onclick="clearLiveRequests()">
+            🗑 Clear History
+          </button>
+        </div>
+      </div>
+
+      <div class="status-grid">
+        <div class="status-tile">
+          <div class="status-tile-label">Connected Partner</div>
+          <div class="status-tile-value">
+            <span style="color: #38bdf8;">Smart Travel Planner</span>
+          </div>
+          <div style="font-size: 0.775rem; color: #94a3b8; margin-top: 0.25rem;">Port: 8000 &bull; Microservice Client</div>
+        </div>
+
+        <div class="status-tile">
+          <div class="status-tile-label">Database Engine</div>
+          <div class="status-tile-value">
+            <span style="color: #34d399;">explorely.db</span>
+          </div>
+          <div style="font-size: 0.775rem; color: #94a3b8; margin-top: 0.25rem;">Curated India Experience Catalog</div>
+        </div>
+
+        <div class="status-tile">
+          <div class="status-tile-label">Total Requests Received</div>
+          <div class="status-tile-value" id="stat-total-count">
+            0
+          </div>
+          <div style="font-size: 0.775rem; color: #94a3b8; margin-top: 0.25rem;">Live server requests logged</div>
+        </div>
+
+        <div class="status-tile">
+          <div class="status-tile-label">Auto Refresh</div>
+          <div class="status-tile-value">
+            <span style="color: #34d399;">Every 2.5s</span>
+          </div>
+          <div style="font-size: 0.775rem; color: #94a3b8; margin-top: 0.25rem;">Real-time WebSocket/Polling sync</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Transactions Section -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        <h2 style="font-size: 1.25rem; font-weight: 800; margin: 0; color: #0f172a;">
+          Live Incoming Requests Stream
+        </h2>
+        <p style="font-size: 0.85rem; color: #64748b; margin: 0.2rem 0 0 0;">
+          Real-time transaction logs showing trip summary received, database match, and places dispatched.
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <span id="last-updated-text" style="font-size: 0.8rem; color: #64748b;">Updated just now</span>
+      </div>
+    </div>
+
+    <!-- Feed Container -->
+    <div id="tx-feed-container">
+      <div class="empty-state">
+        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📡</div>
+        <h3 style="font-size: 1.15rem; color: #1e293b; margin: 0 0 0.5rem 0;">
+          Awaiting API Requests from Smart Travel Planner (:8000)
+        </h3>
+        <p style="max-width: 540px; margin: 0 auto 1.5rem auto; font-size: 0.9rem; line-height: 1.5;">
+          No requests recorded yet. Open <strong>Smart Travel Planner</strong>, visit the 
+          <strong>Recommendations</strong> page, and click <strong>"⚡ Get Recommendations"</strong> or search for a destination (e.g. <em>Goa</em>). 
+          The trip summary (destination, members, budget) and places sent back will immediately populate here!
+        </p>
+        <a href="http://localhost:8000/recommendations.html?id=101" target="_blank" class="btn-action" style="text-decoration: none;">
+          ⚡ Open Travel Planner Recommendations Page &rarr;
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let pollTimer = null;
+
+    async function fetchLiveRequests() {
+      try {
+        const res = await fetch('/api/integration/live-requests');
+        if (!res.ok) throw new Error('Failed to fetch requests');
+        const data = await res.json();
+        renderRequests(data);
+        const now = new Date();
+        document.getElementById('last-updated-text').textContent = 'Last checked: ' + now.toLocaleTimeString();
+      } catch (err) {
+        console.warn('Could not fetch live integration requests:', err);
+      }
+    }
+
+    async function clearLiveRequests() {
+      if (!confirm('Clear all recorded live requests?')) return;
+      try {
+        await fetch('/api/integration/live-requests/clear', { method: 'POST' });
+        fetchLiveRequests();
+      } catch (err) {
+        alert('Failed to clear: ' + err.message);
+      }
+    }
+
+    function renderRequests(data) {
+      const countElem = document.getElementById('stat-total-count');
+      if (countElem) countElem.textContent = data.total_received || 0;
+
+      const container = document.getElementById('tx-feed-container');
+      const requests = data.requests || [];
+
+      if (requests.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📡</div>
+            <h3 style="font-size: 1.15rem; color: #1e293b; margin: 0 0 0.5rem 0;">
+              Awaiting API Requests from Smart Travel Planner (:8000)
+            </h3>
+            <p style="max-width: 540px; margin: 0 auto 1.5rem auto; font-size: 0.9rem; line-height: 1.5;">
+              No requests recorded yet. Open <strong>Smart Travel Planner</strong>, visit the 
+              <strong>Recommendations</strong> page, and click <strong>"⚡ Get Recommendations"</strong> or search for a destination (e.g. <em>Goa</em>). 
+              The trip summary (destination, members, budget) and places sent back will immediately populate here!
+            </p>
+            <a href="http://localhost:8000/recommendations.html?id=101" target="_blank" class="btn-action" style="text-decoration: none;">
+              ⚡ Open Travel Planner Recommendations Page &rarr;
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = requests.map(req => {
+        const travellersText = req.travellers ? `${req.travellers} Members` : 'Not specified';
+        const budgetText = req.budget ? `₹${Number(req.budget).toLocaleString('en-IN')}` : 'Not specified';
+        const samplePlacesHtml = (req.sample_places && req.sample_places.length > 0)
+          ? req.sample_places.map(p => `<span class="place-chip">📍 ${p}</span>`).join('')
+          : '<span style="font-size:0.8rem;color:#94a3b8;font-style:italic;">No places matched query</span>';
+
+        return `
+          <div class="tx-card">
+            <div class="tx-header">
+              <div class="tx-meta">
+                <span class="tx-badge badge-inbound">📥 Inbound Request #${req.id}</span>
+                <span class="tx-badge badge-status-ok">${req.status || 'HTTP 200 OK'}</span>
+                <span style="font-size: 0.825rem; color: #64748b; font-weight: 600;">
+                  ⏰ ${req.timestamp}
+                </span>
+              </div>
+              <div style="font-size: 0.85rem; font-weight: 700; color: #2563eb;">
+                Origin: ${req.client || 'Smart Travel Planner (:8000)'}
+              </div>
+            </div>
+
+            <div class="tx-body">
+              <!-- Left: Trip Request Summary Received -->
+              <div class="tx-pane">
+                <div class="tx-pane-title">
+                  <span>📋</span> Trip Context Received from Planner
+                </div>
+                <div class="trip-summary-box">
+                  <div class="trip-metric">
+                    <span class="trip-metric-k">Target Destination</span>
+                    <span class="trip-metric-v" style="color: #2563eb; font-size: 0.95rem;">📍 ${req.destination || 'All India'}</span>
+                  </div>
+                  <div class="trip-metric">
+                    <span class="trip-metric-k">Trip Members</span>
+                    <span class="trip-metric-v">👥 ${travellersText}</span>
+                  </div>
+                  <div class="trip-metric">
+                    <span class="trip-metric-k">Trip Budget</span>
+                    <span class="trip-metric-v">💳 ${budgetText}</span>
+                  </div>
+                  <div class="trip-metric">
+                    <span class="trip-metric-k">Category Filter</span>
+                    <span class="trip-metric-v">🏷 ${req.category || 'All'}</span>
+                  </div>
+                  <div class="trip-metric">
+                    <span class="trip-metric-k">Search Query</span>
+                    <span class="trip-metric-v">${req.search ? `"${req.search}"` : 'None (Full Catalog)'}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Database Search & Output Dispatched -->
+              <div class="tx-pane" style="background: #f0fdf4; border-color: #bbf7d0;">
+                <div class="tx-pane-title" style="color: #166534;">
+                  <span>⚡</span> Experience Finder Action & Dispatch
+                </div>
+                <div class="trip-summary-box">
+                  <div class="trip-metric" style="border-bottom-color: #dcfce7;">
+                    <span class="trip-metric-k">Database Queried</span>
+                    <span class="trip-metric-v" style="color: #15803d;">explorely.db (SQLite)</span>
+                  </div>
+                  <div class="trip-metric" style="border-bottom-color: #dcfce7;">
+                    <span class="trip-metric-k">Matched Experiences</span>
+                    <span class="trip-metric-v" style="color: #15803d; font-size: 1rem;">
+                      ✅ ${req.places_found} places found
+                    </span>
+                  </div>
+                  <div class="trip-metric" style="border-bottom-color: #dcfce7;">
+                    <span class="trip-metric-k">Dispatch Status</span>
+                    <span class="trip-metric-v" style="color: #15803d;">Dispatched to Planner (HTTP 200)</span>
+                  </div>
+                </div>
+
+                <div style="margin-top: 0.75rem;">
+                  <span style="font-size: 0.75rem; font-weight: 700; color: #166534; text-transform: uppercase;">
+                    Dispatched Places Sample:
+                  </span>
+                  <div class="places-chips">
+                    ${samplePlacesHtml}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Initial load and start 2.5s polling
+    fetchLiveRequests();
+    pollTimer = setInterval(fetchLiveRequests, 2500);
+  </script>
+</body>
+</html>
