@@ -8,9 +8,9 @@ env/
 venv/
 ENV/
 
-# Database
-*.db
+# Database (explorely.db is included so deployment services like Render have the full catalog)
 *.sqlite3
+# *.db
 
 # Environment
 .env
