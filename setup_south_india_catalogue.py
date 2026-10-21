@@ -35,7 +35,12 @@ def main():
                     # Keep any existing real review aggregate until the dedicated reconciliation step.
                     actual_count=int(row.review_count or 0)
                     for k,v in values.items():
-                        if k not in ("rating","review_count"): setattr(row,k,v)
+                        if k in ("rating", "review_count"):
+                            continue
+                        if k in ("image_url", "gallery_json") and row.image_url and "photo-1500530855697" not in (row.image_url or ""):
+                            if "photo-1500530855697" in str(v):
+                                continue
+                        setattr(row, k, v)
                     if actual_count > 0: values_rating=row.rating; values_count=row.review_count
                     else: row.rating=0.0; row.review_count=0
                     updated_exp+=1
