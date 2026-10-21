@@ -21,6 +21,19 @@ Base.metadata.create_all(bind=engine)
 with SessionLocal() as db_session:
     seed_database(db_session)
 
+# Ensure full catalogue is loaded even on fresh deployments (like Render)
+try:
+    import setup_south_india_catalogue
+    setup_south_india_catalogue.main()
+except Exception as e:
+    print(f"[*] Note: South India catalogue initialization: {e}")
+
+try:
+    import add_additional_places
+    add_additional_places.main()
+except Exception as e:
+    print(f"[*] Note: Additional places initialization: {e}")
+
 
 # --------------------------------------------------
 # Initialize FastAPI application
